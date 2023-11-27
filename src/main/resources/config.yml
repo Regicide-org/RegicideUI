@@ -1,0 +1,20 @@
+# Will RegicideUI use Vault plugin.
+vault: True
+
+# Will RegicideUI use ProtocolLib plugin.
+protocol-lib: true
+
+# Plugin's localization.
+#
+# NOTE: Default localization is en_US.
+localization: ru-RU
+
+# Shows the player's balance at the bottom right of the screen.
+#
+# NOTE: Vault plugin required!
+# Vault: https://www.spigotmc.org/resources/vault.34315/
+show-own-balance: True
+
+
+# Opens a player's profile when clicked on it.
+open-player-profile-on-click: True

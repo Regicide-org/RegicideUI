@@ -1,0 +1,16 @@
+name: RegicideUI
+version: '${project.version}'
+main: org.regicide.regicideui.RegicideUI
+api-version: '1.20'
+author: Theorenter
+softdepend: [ Vault ]
+
+commands:
+  Menu:
+    description: Opens main server menu.
+    aliases: [ main-menu, concordia-menu, mn ]
+    permission: regicideui.command.menu
+
+permissions:
+  regicideui.command.menu:
+    default: true
