@@ -6,7 +6,6 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.inventory.InventoryOpenEvent;
 import org.jetbrains.annotations.NotNull;
-import org.regicide.regicideui.RegicideUI;
 import org.regicide.regicideui.ui.inventory.InventoryGUI;
 
 public final class InventoryGUIListener implements Listener {
@@ -34,9 +33,6 @@ public final class InventoryGUIListener implements Listener {
     public void onOpen(@NotNull final InventoryOpenEvent e) {
         if (!(e.getInventory().equals(inventoryGUI.getInventory())))
             return;
-
-        RegicideUI.instance().getLogger().info("Кастомный инвентарь открыт! " + inventoryGUI.getTitle());
-
         inventoryGUI.onOpen(e);
     }
 
@@ -45,10 +41,8 @@ public final class InventoryGUIListener implements Listener {
         if (!(e.getInventory().equals(inventoryGUI.getInventory())))
             return;
 
-        RegicideUI.instance().getLogger().info("Кастомный инвентарь закрыт! " + inventoryGUI.getTitle());
         inventoryGUI.onClose(e);
 
-        RegicideUI.instance().getLogger().info("Листенеры этого ивнентаря ушли нахуй! " + inventoryGUI.getTitle());
         InventoryClickEvent.getHandlerList().unregister(this);
         InventoryOpenEvent.getHandlerList().unregister(this);
         InventoryCloseEvent.getHandlerList().unregister(this);

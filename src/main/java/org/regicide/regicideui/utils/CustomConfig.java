@@ -9,7 +9,7 @@ import org.regicide.regicideui.RegicideUI;
 import java.io.File;
 import java.io.IOException;
 
-public class CustomConfig {
+public final class CustomConfig {
     private File configFile;
     private FileConfiguration config;
 

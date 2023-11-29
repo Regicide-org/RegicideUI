@@ -5,7 +5,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.jetbrains.annotations.NotNull;
-import org.regicide.regicideui.RegicideUI;
 import org.regicide.regicideui.entities.players.RegicideUIPlayerManager;
 
 /**
@@ -16,7 +15,7 @@ public final class PlayerListener implements Listener {
     @EventHandler
     public void onPlayerJoin(@NotNull final PlayerJoinEvent e) {
         RegicideUIPlayerManager.addPlayer(e.getPlayer());
-        e.getPlayer().sendMessage(String.valueOf(RegicideUI.getEconomy().getBalance(e.getPlayer())));
+        //e.getPlayer().sendMessage(String.valueOf(RegicideUI.getEconomy().getBalance(e.getPlayer())));
     }
 
     @EventHandler

@@ -1,0 +1,21 @@
+localization: "ru-RU"
+
+# GUI Localization
+
+# Menu
+menu-title: "<#FFFFFF><!italic>ށ"
+
+profile-button-name: "<#429C57><!italic>Профиль пользователя"
+profile-button-lore: ["", "<#C6C6C6><!italic>Здесь Вы можете узнать информацию о себе", "<#C6C6C6><!italic>и о других игроках сервера.", "", " <#30A8FF><!italic>→ Кликните, чтобы открыть"]
+
+encyclopedia-button-name: "<#3979C6><!italic>Энциклопедия"
+encyclopedia-button-lore: ["", "<#C6C6C6><!italic>Руководство о том, как и что работает", "<#C6C6C6><!italic>на сервере.", "", " <#30A8FF><!italic>→ Кликните, чтобы открыть"]
+
+towns-button-name: "<#C62F2F><!italic>Города"
+towns-button-lore: ["", "<#C6C6C6><!italic>Вся информация о Вашем и иных", "<#C6C6C6><!italic>городах сервера.", "", " <#30A8FF><!italic>→ Кликните, чтобы открыть"]
+
+nations-button-name: "<#935CE2><!italic>Державы"
+nations-button-lore: ["", "<#C6C6C6><!italic>Вся информация о Вашей и иных", "<#C6C6C6><!italic>державах сервера.", "", " <#30A8FF><!italic>→ Кликните, чтобы открыть"]
+
+market-button-name: "<#FCB92A><!italic>Рынок"
+market-button-lore: ["", "<#C6C6C6><!italic>Безопасно обменивайтесь со всеми", "<#C6C6C6><!italic>пользователями на рынке!", "", " <#30A8FF><!italic>→ Кликните, чтобы открыть"]

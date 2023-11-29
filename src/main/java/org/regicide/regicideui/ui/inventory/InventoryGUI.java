@@ -2,13 +2,12 @@ package org.regicide.regicideui.ui.inventory;
 
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextColor;
+import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.util.HSVLike;
 import org.bukkit.Bukkit;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.inventory.InventoryOpenEvent;
 import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
 import org.regicide.regicideui.entities.players.RegicideUIPlayer;
 
@@ -36,7 +35,7 @@ public abstract class InventoryGUI {
     }
 
     public void build() {
-        Component titleComponent = Component.text(title).color(TextColor.color(HSVLike.fromRGB(255, 255, 255))).toBuilder().build();
+        Component titleComponent = MiniMessage.miniMessage().deserialize(title);
         Inventory inv = Bukkit.createInventory(null, rows * 9, titleComponent);
 
         for (IGUIElement el : elementMap.values()) {

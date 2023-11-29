@@ -1,11 +1,8 @@
 package org.regicide.regicideui.ui.inventory;
 
-import net.kyori.adventure.text.Component;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
-
-import java.util.List;
 
 /**
  * The functional element of the InventoryGUI.
@@ -13,10 +10,8 @@ import java.util.List;
 public abstract class IGUIElement {
 
     private ItemStack slotItem;
-    private Component displayName;
-    private int amount = 1;
-    private List<Component> lore;
-    private int slot;
+    private final int amount = 1;
+    private final int slot;
 
     /**
      * Builder

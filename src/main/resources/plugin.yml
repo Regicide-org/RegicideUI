@@ -11,6 +11,11 @@ commands:
     aliases: [ main-menu, concordia-menu, mn ]
     permission: regicideui.command.menu
 
+  regicideui:
+    description: Main plugin command
+    aliases: [ rui ]
+    permission: regicideui.command.rui
+
 permissions:
   regicideui.command.menu:
     default: true
