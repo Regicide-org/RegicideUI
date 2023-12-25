@@ -5,10 +5,6 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
-import org.regicide.regicideui.RegicideUI;
-import org.regicide.regicideui.entities.players.RegicideUIPlayer;
-import org.regicide.regicideui.entities.players.RegicideUIPlayerManager;
-import org.regicide.regicideui.ui.inventory.inventories.menu.MenuGUI;
 
 public final class MenuCMD implements CommandExecutor {
 
@@ -26,10 +22,6 @@ public final class MenuCMD implements CommandExecutor {
         if (!(player.hasPermission(command.getPermission()))) {
             player.sendMessage("You don't have permission to use this command!");
         }
-
-        RegicideUIPlayer rPlayer = RegicideUIPlayerManager.getRegicideUiPlayer(player);
-
-        rPlayer.openIGUI(new MenuGUI(rPlayer, "menu-gui", RegicideUI.l().c().getString("menu-title"), 6));
 
         return true;
     }

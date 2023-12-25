@@ -38,6 +38,14 @@
                             <goal>shade</goal>
                         </goals>
                         <configuration>
+                            <minimizeJar>true</minimizeJar>
+                            <relocations>
+                                <relocation>
+                                    <pattern>dev.jorel.commandapi</pattern>
+                                    <!-- TODO: Change this to my own package name -->
+                                    <shadedPattern>org.regicide.regicideui</shadedPattern>
+                                </relocation>
+                            </relocations>
                             <createDependencyReducedPom>false</createDependencyReducedPom>
                             <outputFile>I:\Server\ConcordiaCraft\ConcordiaCraft - 1.20.2\plugins\${project.name}-${project.version}.jar</outputFile>
                         </configuration>
@@ -66,6 +74,10 @@
             <id>jitpack.io</id>
             <url>https://jitpack.io</url>
         </repository>
+        <repository>
+            <id>xenondevs</id>
+            <url>https://repo.xenondevs.xyz/releases</url>
+        </repository>
     </repositories>
 
     <dependencies>
@@ -79,6 +91,18 @@
             <groupId>com.github.MilkBowl</groupId>
             <artifactId>VaultAPI</artifactId>
             <version>1.7</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>xyz.xenondevs.invui</groupId>
+            <artifactId>invui</artifactId>
+            <version>1.24</version>
+            <type>pom</type>
+        </dependency>
+        <dependency>
+            <groupId>dev.jorel</groupId>
+            <artifactId>commandapi-bukkit-core</artifactId>
+            <version>9.3.0</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>

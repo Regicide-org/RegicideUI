@@ -7,8 +7,6 @@ import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.regicide.regicideui.commands.MenuCMD;
 import org.regicide.regicideui.commands.RegicideuiCMD;
-import org.regicide.regicideui.entities.players.RegicideUIPlayerManager;
-import org.regicide.regicideui.listeners.PlayerListener;
 import org.regicide.regicideui.utils.CustomConfig;
 
 import java.io.File;
@@ -28,7 +26,7 @@ public final class RegicideUI extends JavaPlugin {
     public void onEnable() {
         // Plugin startup logic
         instance = this;
-        RegicideUIPlayerManager.loadAllPlayers();
+        //RegicideUIPlayerManager.loadAllPlayers();
 
         if (!new File(getDataFolder(), "config.yml").exists()) {
             saveDefaultConfig();
@@ -41,7 +39,6 @@ public final class RegicideUI extends JavaPlugin {
                 setupEconomy();
 
                 getLogger().info(vault.getPluginMeta().getName() + " – " + vault.getPluginMeta().getVersion() + " was successfully found!");
-
             }
             else {
                 getLogger().warning("Vault was not found! All plugin elements using Vault will be disabled!");
@@ -55,15 +52,14 @@ public final class RegicideUI extends JavaPlugin {
 
         getLogger().info("");
         getLogger().info("Loading listeners...");
-        getServer().getPluginManager().registerEvents(new PlayerListener(), this);
         getLogger().info("All listeners successfully loaded!");
 
         getLogger().info("");
         getLogger().info("Loading commands...");
         Objects.requireNonNull(
-                this.getCommand("Menu")).setExecutor(new MenuCMD());
+                this.getCommand("menu")).setExecutor(new MenuCMD());
         Objects.requireNonNull(
-                this.getCommand("Regicideui")).setExecutor(new RegicideuiCMD());
+                this.getCommand("regicideui")).setExecutor(new RegicideuiCMD());
         getLogger().info("All commands successfully loaded!");
     }
 
@@ -71,7 +67,7 @@ public final class RegicideUI extends JavaPlugin {
      * Reloads the plugin.
      */
     public void reload() {
-        RegicideUIPlayerManager.loadAllPlayers();
+        //RegicideUIPlayerManager.loadAllPlayers();
         this.reloadConfig();
         localization = new CustomConfig("localization" + File.separator + getConfig().getString("localization") + ".yml");
     }
