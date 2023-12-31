@@ -1,7 +1,7 @@
 package org.regicide.regicideui.ui;
 
 import org.jetbrains.annotations.NotNull;
-import org.regicide.regicideui.ui.Menu.MenuGUI;
+import org.regicide.regicideui.ui.menu.MenuGUI;
 import xyz.xenondevs.invui.gui.Gui;
 
 import java.util.HashMap;

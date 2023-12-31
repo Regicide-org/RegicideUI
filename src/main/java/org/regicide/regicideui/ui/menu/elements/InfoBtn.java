@@ -1,4 +1,4 @@
-package org.regicide.regicideui.ui.Menu.elements;
+package org.regicide.regicideui.ui.menu.elements;
 
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;

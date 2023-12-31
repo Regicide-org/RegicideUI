@@ -1,4 +1,4 @@
-package org.regicide.regicideui.ui.Menu.elements;
+package org.regicide.regicideui.ui.menu.elements;
 
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
@@ -19,7 +19,7 @@ import xyz.xenondevs.invui.item.impl.AbstractItem;
 import java.util.ArrayList;
 import java.util.List;
 
-public final class DiscordBtn extends AbstractItem {
+public final class EncyclopediaBtn extends AbstractItem {
     @Override
     public ItemProvider getItemProvider() {
         ItemStack i = new ItemStack(Material.FLINT_AND_STEEL);
@@ -27,8 +27,8 @@ public final class DiscordBtn extends AbstractItem {
 
 
 
-        m.setCustomModelData(104);
-        TextComponent name = Component.text("Социальные сети")
+        m.setCustomModelData(106);
+        TextComponent name = Component.text("Энциклопедия")
                 .decoration(TextDecoration.ITALIC, false)
                 .color(TextColor.color(0xFFFFFF))
                 .decorate(TextDecoration.BOLD)
@@ -39,12 +39,12 @@ public final class DiscordBtn extends AbstractItem {
 
         List<TextComponent> lore = new ArrayList<>();
         TextComponent s1 = Component.empty();
-        TextComponent s2 = Component.text("Мы есть в VK, Discrod и\n").decoration(TextDecoration.ITALIC, false).color(TextColor.color(0xFCFC00))
-                .append(Component.text("YouTube. Подписывайтесь!\n\n"))
+        TextComponent s2 = Component.text("Правила сервера, информация\n").decoration(TextDecoration.ITALIC, false).color(TextColor.color(0xFCFC00))
+                .append(Component.text("об игровых механиках и всё-всё-всё\n\n"))
                 .append(Component.text("\u0500 ").color(TextColor.color(0xFFFFFF)))
                 .append(Component.text().content(">").color(NamedTextColor.DARK_GRAY))
                 .append(Component.text().content(" Клик ").color(TextColor.color(0xE9D282)))
-                .append(Component.text().content("– открыть подменю ссылок").color(TextColor.color(0xFCFC00)))
+                .append(Component.text().content("– открыть энциклопедию").color(TextColor.color(0xFCFC00)))
                 .toBuilder().build();
         lore.add(s1);
         lore.add(s2);

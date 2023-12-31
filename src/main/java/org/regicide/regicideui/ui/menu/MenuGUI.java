@@ -1,7 +1,7 @@
-package org.regicide.regicideui.ui.Menu;
+package org.regicide.regicideui.ui.menu;
 
 import org.jetbrains.annotations.NotNull;
-import org.regicide.regicideui.ui.Menu.elements.*;
+import org.regicide.regicideui.ui.menu.elements.*;
 import org.regicide.regicideui.ui.RGUIContainer;
 import org.regicide.regicideui.ui.universal.ExitBtn;
 import xyz.xenondevs.invui.gui.Gui;
