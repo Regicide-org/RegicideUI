@@ -1,3 +1,8 @@
+############################################################
+# +------------------------------------------------------+ #
+# |                    Main config                       | #
+# +------------------------------------------------------+ #
+############################################################
 # Will RegicideUI use Vault plugin.
 vault: True
 
@@ -9,12 +14,28 @@ protocol-lib: true
 # NOTE: Default localization is en_US.
 localization: ru-RU
 
+
+# Opens a player's profile when clicked on it.
+open-player-profile-on-click: True
+
+############################################################
+# +------------------------------------------------------+ #
+# |                      HUD & GUI                       | #
+# +------------------------------------------------------+ #
+############################################################
+
+# URL of the web-map, that will be shown in menu GUI.
+web-map-url:
+
 # Shows the player's balance at the bottom right of the screen.
 #
 # NOTE: Vault plugin required!
 # Vault: https://www.spigotmc.org/resources/vault.34315/
 show-own-balance: True
 
+############################################################
+# +------------------------------------------------------+ #
+# |                      Resources                       | #
+# +------------------------------------------------------+ #
+############################################################
 
-# Opens a player's profile when clicked on it.
-open-player-profile-on-click: True

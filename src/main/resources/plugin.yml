@@ -4,18 +4,3 @@ main: org.regicide.regicideui.RegicideUI
 api-version: '1.20'
 author: Theorenter
 softdepend: [ Vault, CommandAPI ]
-
-commands:
-  menu:
-    description: Opens main server menu.
-    aliases: [ main-menu, concordia-menu, mn ]
-    permission: regicideui.command.menu
-
-  regicideui:
-    description: Main plugin command
-    aliases: [ rui ]
-    permission: regicideui.command.rui
-
-permissions:
-  regicideui.command.menu:
-    default: true

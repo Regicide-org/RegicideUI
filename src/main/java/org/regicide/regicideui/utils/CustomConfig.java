@@ -11,7 +11,7 @@ import java.io.IOException;
 
 public final class CustomConfig {
     private File configFile;
-    private FileConfiguration config;
+    private final FileConfiguration config;
 
     /**
      * Creates new custom configuration for the plugin.

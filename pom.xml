@@ -25,12 +25,19 @@
                 <configuration>
                     <source>8</source>
                     <target>8</target>
+                    <annotationProcessorPaths>
+                        <path>
+                            <groupId>dev.jorel</groupId>
+                            <artifactId>commandapi-annotations</artifactId>
+                            <version>9.3.0</version>
+                        </path>
+                    </annotationProcessorPaths>
                 </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
-                <version>3.2.4</version>
+                <version>3.3.0</version>
                 <executions>
                     <execution>
                         <phase>package</phase>
@@ -38,21 +45,20 @@
                             <goal>shade</goal>
                         </goals>
                         <configuration>
-                            <minimizeJar>true</minimizeJar>
                             <relocations>
                                 <relocation>
                                     <pattern>dev.jorel.commandapi</pattern>
-                                    <!-- TODO: Change this to my own package name -->
-                                    <shadedPattern>org.regicide.regicideui</shadedPattern>
+                                    <shadedPattern>org.regicide.regicideui.commandapi</shadedPattern>
                                 </relocation>
                             </relocations>
                             <createDependencyReducedPom>false</createDependencyReducedPom>
-                            <outputFile>I:\Server\ConcordiaCraft\ConcordiaCraft - 1.20.2\plugins\${project.name}-${project.version}.jar</outputFile>
+                            <outputFile>I:\Server\ConcordiaCraft\ConcordiaCraft - 1.20.4\plugins\${project.name}-${project.version}.jar</outputFile>
                         </configuration>
                     </execution>
                 </executions>
             </plugin>
         </plugins>
+
         <resources>
             <resource>
                 <directory>src/main/resources</directory>
@@ -101,7 +107,12 @@
         </dependency>
         <dependency>
             <groupId>dev.jorel</groupId>
-            <artifactId>commandapi-bukkit-core</artifactId>
+            <artifactId>commandapi-bukkit-shade</artifactId>
+            <version>9.3.0</version>
+        </dependency>
+        <dependency>
+            <groupId>dev.jorel</groupId>
+            <artifactId>commandapi-annotations</artifactId>
             <version>9.3.0</version>
             <scope>provided</scope>
         </dependency>

@@ -1,16 +1,17 @@
 package org.regicide.regicideui;
 
-import net.kyori.adventure.text.Component;
+import dev.jorel.commandapi.CommandAPI;
+import dev.jorel.commandapi.CommandAPIBukkitConfig;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.regicide.regicideui.commands.MenuCMD;
 import org.regicide.regicideui.commands.RegicideuiCMD;
+import org.regicide.regicideui.ui.GUIManager;
 import org.regicide.regicideui.utils.CustomConfig;
 
 import java.io.File;
-import java.util.Objects;
 
 /**
  * Main plugin class.
@@ -21,6 +22,11 @@ public final class RegicideUI extends JavaPlugin {
 
     private static RegicideUI instance;
     private static CustomConfig localization;
+
+    @Override
+    public void onLoad() {
+        CommandAPI.onLoad(new CommandAPIBukkitConfig(this).silentLogs(true));
+    }
 
     @Override
     public void onEnable() {
@@ -56,11 +62,15 @@ public final class RegicideUI extends JavaPlugin {
 
         getLogger().info("");
         getLogger().info("Loading commands...");
-        Objects.requireNonNull(
-                this.getCommand("menu")).setExecutor(new MenuCMD());
-        Objects.requireNonNull(
-                this.getCommand("regicideui")).setExecutor(new RegicideuiCMD());
+        CommandAPI.onEnable();
+        CommandAPI.registerCommand(RegicideuiCMD.class);
+        CommandAPI.registerCommand(MenuCMD.class);
         getLogger().info("All commands successfully loaded!");
+
+        getLogger().info("");
+        getLogger().info("Loading GUIs");
+        GUIManager.load();
+        getLogger().info("All GUIs successfully loaded!");
     }
 
     /**
@@ -70,6 +80,7 @@ public final class RegicideUI extends JavaPlugin {
         //RegicideUIPlayerManager.loadAllPlayers();
         this.reloadConfig();
         localization = new CustomConfig("localization" + File.separator + getConfig().getString("localization") + ".yml");
+        getLogger().info("Plugin was successfully reload!");
     }
 
     @Override
