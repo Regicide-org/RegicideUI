@@ -1,9 +1,7 @@
-package org.regicide.regicideui.ui.menu.elements;
+package org.regicide.regicideui.ui.hrefs.elements;
 
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
-import org.bukkit.Material;
-import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
@@ -11,33 +9,21 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
 import org.regicide.regicideui.RegicideUI;
+import org.regicide.regicideui.ui.universal.InfoItem;
 import xyz.xenondevs.invui.item.ItemProvider;
 import xyz.xenondevs.invui.item.builder.ItemBuilder;
 import xyz.xenondevs.invui.item.impl.AbstractItem;
-import xyz.xenondevs.invui.window.Window;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public final class DynMapBtn extends AbstractItem {
+public final class InfoBtn extends AbstractItem {
     @Override
     public ItemProvider getItemProvider() {
-        ItemStack i = new ItemStack(Material.FLINT_AND_STEEL);
+        ItemStack i = InfoItem.getItem().clone();
         ItemMeta m = i.getItemMeta();
 
-
-
-        m.setCustomModelData(111);
-
-
-
-        String titleText = RegicideUI.l().c().getString("menu-button-web-map-name");
-        Component title = MiniMessage.miniMessage().deserialize("<i:false><white>"+titleText+"</white></i>");
-        m.displayName(title);
-
-
-
-        List<String> loreText = RegicideUI.l().c().getStringList("menu-button-web-map-lore");
+        List<String> loreText = RegicideUI.l().c().getStringList("hrefs-button-info-lore");
         List<Component> lore = new ArrayList<>();
         for (String s : loreText)
             lore.add(MiniMessage.miniMessage().deserialize("<i:false><white>"+s+"</white></i>"));
@@ -51,10 +37,7 @@ public final class DynMapBtn extends AbstractItem {
 
     @Override
     public void handleClick(@NotNull ClickType clickType, @NotNull Player player, @NotNull InventoryClickEvent event) {
-        if (clickType.isLeftClick()) {
-            player.playSound(player, Sound.UI_BUTTON_CLICK, 1, 1);
-            this.getWindows().forEach(Window::close);
-            player.performCommand("map");
-        }
+
     }
+
 }

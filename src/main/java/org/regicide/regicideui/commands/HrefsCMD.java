@@ -1,6 +1,5 @@
 package org.regicide.regicideui.commands;
 
-import dev.jorel.commandapi.annotations.Alias;
 import dev.jorel.commandapi.annotations.Command;
 import dev.jorel.commandapi.annotations.Default;
 import dev.jorel.commandapi.annotations.Permission;
@@ -11,14 +10,12 @@ import org.regicide.regicideui.RegicideUI;
 import org.regicide.regicideui.ui.GUIManager;
 import xyz.xenondevs.invui.window.Window;
 
-
-@Command("menu")
-@Alias({"main"})
-public final class MenuCMD {
+@Command("hrefs")
+public final class HrefsCMD {
     @SuppressWarnings("ConstantConditions")
     @Default
-    @Permission("regicideui.command.menu")
-    public static void menu(@NotNull final CommandSender sender) {
+    @Permission("regicideui.command.hrefs")
+    public static void hrefs(@NotNull final CommandSender sender) {
         if (!(sender instanceof Player)) {
             sender.sendMessage("Only for players!");
             return;
@@ -26,8 +23,8 @@ public final class MenuCMD {
 
         Window window = Window.merged()
                 .setViewer((Player) sender)
-                .setGui(GUIManager.getGui("menu"))
-                .setTitle(RegicideUI.l().c().getString("menu-title"))
+                .setGui(GUIManager.getGui("hrefs"))
+                .setTitle(RegicideUI.l().c().getString("hrefs-title"))
                 .build();
         window.open();
     }

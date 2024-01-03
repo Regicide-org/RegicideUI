@@ -10,7 +10,7 @@ import java.io.File;
 import java.io.IOException;
 
 public final class CustomConfig {
-    private File configFile;
+    private final File configFile;
     private final FileConfiguration config;
 
     /**
@@ -38,5 +38,13 @@ public final class CustomConfig {
      */
     public FileConfiguration c() {
         return this.config;
+    }
+
+    /**
+     * @return The file.
+     */
+    @SuppressWarnings("unused")
+    public File getConfigFile() {
+        return configFile;
     }
 }

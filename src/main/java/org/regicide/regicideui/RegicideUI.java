@@ -1,13 +1,11 @@
 package org.regicide.regicideui;
 
 import dev.jorel.commandapi.CommandAPI;
-import dev.jorel.commandapi.CommandAPIBukkitConfig;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.regicide.regicideui.commands.MenuCMD;
-import org.regicide.regicideui.commands.RegicideuiCMD;
+import org.regicide.regicideui.commands.*;
 import org.regicide.regicideui.ui.GUIManager;
 import org.regicide.regicideui.utils.CustomConfig;
 
@@ -25,9 +23,10 @@ public final class RegicideUI extends JavaPlugin {
 
     @Override
     public void onLoad() {
-        CommandAPI.onLoad(new CommandAPIBukkitConfig(this).silentLogs(true));
+
     }
 
+    @SuppressWarnings("UnstableApiUsage")
     @Override
     public void onEnable() {
         // Plugin startup logic
@@ -43,7 +42,6 @@ public final class RegicideUI extends JavaPlugin {
             Plugin vault = getServer().getPluginManager().getPlugin("Vault");
             if (vault != null) {
                 setupEconomy();
-
                 getLogger().info(vault.getPluginMeta().getName() + " – " + vault.getPluginMeta().getVersion() + " was successfully found!");
             }
             else {
@@ -62,9 +60,12 @@ public final class RegicideUI extends JavaPlugin {
 
         getLogger().info("");
         getLogger().info("Loading commands...");
-        CommandAPI.onEnable();
         CommandAPI.registerCommand(RegicideuiCMD.class);
         CommandAPI.registerCommand(MenuCMD.class);
+        CommandAPI.registerCommand(MapCMD.class);
+        CommandAPI.registerCommand(HrefsCMD.class);
+        CommandAPI.registerCommand(DiscordCMD.class);
+        CommandAPI.registerCommand(VkCMD.class);
         getLogger().info("All commands successfully loaded!");
 
         getLogger().info("");
@@ -99,6 +100,7 @@ public final class RegicideUI extends JavaPlugin {
         econ = rsp.getProvider();
     }
 
+    @SuppressWarnings("unused")
     public static Economy getEconomy() {
         return econ;
     }

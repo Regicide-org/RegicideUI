@@ -1,4 +1,4 @@
-package org.regicide.regicideui.ui.menu.elements;
+package org.regicide.regicideui.ui.hrefs.elements;
 
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
@@ -19,7 +19,7 @@ import xyz.xenondevs.invui.window.Window;
 import java.util.ArrayList;
 import java.util.List;
 
-public final class DynMapBtn extends AbstractItem {
+public final class DiscordBtn extends AbstractItem {
     @Override
     public ItemProvider getItemProvider() {
         ItemStack i = new ItemStack(Material.FLINT_AND_STEEL);
@@ -27,17 +27,17 @@ public final class DynMapBtn extends AbstractItem {
 
 
 
-        m.setCustomModelData(111);
+        m.setCustomModelData(112);
 
 
 
-        String titleText = RegicideUI.l().c().getString("menu-button-web-map-name");
+        String titleText = RegicideUI.l().c().getString("hrefs-button-discord-name");
         Component title = MiniMessage.miniMessage().deserialize("<i:false><white>"+titleText+"</white></i>");
         m.displayName(title);
 
 
 
-        List<String> loreText = RegicideUI.l().c().getStringList("menu-button-web-map-lore");
+        List<String> loreText = RegicideUI.l().c().getStringList("hrefs-button-discord-lore");
         List<Component> lore = new ArrayList<>();
         for (String s : loreText)
             lore.add(MiniMessage.miniMessage().deserialize("<i:false><white>"+s+"</white></i>"));
@@ -54,7 +54,7 @@ public final class DynMapBtn extends AbstractItem {
         if (clickType.isLeftClick()) {
             player.playSound(player, Sound.UI_BUTTON_CLICK, 1, 1);
             this.getWindows().forEach(Window::close);
-            player.performCommand("map");
+            player.performCommand("discord");
         }
     }
 }

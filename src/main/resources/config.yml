@@ -25,7 +25,13 @@ open-player-profile-on-click: True
 ############################################################
 
 # URL of the web-map, that will be shown in menu GUI.
-web-map-url:
+map-url: "http://localhost:8123/"
+
+# URL of the VK group, that will be shown in hrefs GUI.
+vk-group-url: "https://vk.com/concordiacraft"
+
+# URL of the Discord group, that will be shown in hrefs GUI.
+discord-group-url: "https://discord.com/invite/D7JdwX7"
 
 # Shows the player's balance at the bottom right of the screen.
 #

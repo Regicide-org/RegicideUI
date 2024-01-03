@@ -1,12 +1,11 @@
 package org.regicide.regicideui.ui.universal;
 
 import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.TextComponent;
-import net.kyori.adventure.text.format.TextColor;
-import net.kyori.adventure.text.format.TextDecoration;
+import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.regicide.regicideui.RegicideUI;
 
 public final class InfoItem {
     public static ItemStack getItem() {
@@ -15,13 +14,13 @@ public final class InfoItem {
 
 
 
-        m.setCustomModelData(102);
-        TextComponent name = Component.text("Инфо")
-                .decoration(TextDecoration.ITALIC, false)
-                .color(TextColor.color(0xFFFFFF))
-                .decorate(TextDecoration.BOLD)
-                .toBuilder().build();
-        m.displayName(name);
+        m.setCustomModelData(99);
+
+        String titleText = RegicideUI.l().c().getString("button-info-name");
+        Component title = MiniMessage.miniMessage().deserialize("<i:false><white>"+titleText+"</white></i>");
+        m.displayName(title);
+
+
 
         i.setItemMeta(m);
         return i;

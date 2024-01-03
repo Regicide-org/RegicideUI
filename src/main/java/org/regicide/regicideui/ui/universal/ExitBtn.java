@@ -1,17 +1,16 @@
 package org.regicide.regicideui.ui.universal;
 
 import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.TextComponent;
-import net.kyori.adventure.text.format.NamedTextColor;
-import net.kyori.adventure.text.format.TextColor;
-import net.kyori.adventure.text.format.TextDecoration;
+import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
+import org.regicide.regicideui.RegicideUI;
 import xyz.xenondevs.invui.item.ItemProvider;
 import xyz.xenondevs.invui.item.builder.ItemBuilder;
 import xyz.xenondevs.invui.item.impl.AbstractItem;
@@ -31,26 +30,20 @@ public final class ExitBtn extends AbstractItem {
 
 
         m.setCustomModelData(101);
-        TextComponent name = Component.text("Выйти")
-                .decoration(TextDecoration.ITALIC, false)
-                .color(TextColor.color(0xFFFFFF))
-                .decorate(TextDecoration.BOLD)
-                .toBuilder().build();
-        m.displayName(name);
+
+        String titleText = RegicideUI.l().c().getString("button-exit-name");
+        Component title = MiniMessage.miniMessage().deserialize("<i:false><white>"+titleText+"</white></i>");
+        m.displayName(title);
 
 
 
-        List<TextComponent> lore = new ArrayList<>();
-        TextComponent s1 = Component.empty();
-        TextComponent s2 = Component
-                .text("\u0500 ").color(TextColor.color(0xFFFFFF)).decoration(TextDecoration.ITALIC, false)
-                .append(Component.text().content(">").color(NamedTextColor.DARK_GRAY))
-                .append(Component.text().content(" Кликните,").color(TextColor.color(0xE9D282)))
-                .append(Component.text().content(" чтобы закрыть").color(TextColor.color(0xFCFC00)))
-                .toBuilder().build();
-        lore.add(s1);
-        lore.add(s2);
+        List<String> loreText = RegicideUI.l().c().getStringList("button-exit-lore");
+        List<Component> lore = new ArrayList<>();
+        for (String s : loreText)
+            lore.add(MiniMessage.miniMessage().deserialize("<i:false><white>"+s+"</white></i>"));
         m.lore(lore);
+
+
 
         i.setItemMeta(m);
         return new ItemBuilder(i);
@@ -58,7 +51,9 @@ public final class ExitBtn extends AbstractItem {
 
     @Override
     public void handleClick(@NotNull ClickType clickType, @NotNull Player player, @NotNull InventoryClickEvent event) {
-        if (clickType.isLeftClick())
+        if (clickType.isLeftClick()) {
+            player.playSound(player, Sound.UI_BUTTON_CLICK, 1, 1);
             this.getWindows().forEach(Window::close);
+        }
     }
 }

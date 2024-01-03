@@ -1,6 +1,7 @@
 package org.regicide.regicideui.ui;
 
 import org.jetbrains.annotations.NotNull;
+import org.regicide.regicideui.ui.hrefs.HrefsGUI;
 import org.regicide.regicideui.ui.menu.MenuGUI;
 import xyz.xenondevs.invui.gui.Gui;
 
@@ -16,6 +17,7 @@ public final class GUIManager {
      */
     public static void load() {
         GUI_MAP.put("menu", new MenuGUI());
+        GUI_MAP.put("hrefs", new HrefsGUI());
     }
 
     /**

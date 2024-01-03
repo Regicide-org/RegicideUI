@@ -11,7 +11,7 @@ public final class MenuGUI implements RGUIContainer {
     private final Gui gui;
 
     public MenuGUI() {
-        this.gui = Gui.normal() // Creates the GuiBuilder for a normal GUI
+        this.gui = Gui.normal()
                 .setStructure(
                         ". . . . . . . . .",
                         ". . . . . . . . .",
@@ -26,7 +26,7 @@ public final class MenuGUI implements RGUIContainer {
                 .addIngredient('x', new ExitBtn())
                 .addIngredient('i', new InfoBtn())
                 .addIngredient('a', new DynMapBtn())
-                .addIngredient('s', new DiscordBtn())
+                .addIngredient('s', new HrefsBtn())
                 .addIngredient('p', new ProfileBtn())
                 .addIngredient('t', new TownsBtn())
                 .addIngredient('n', new NationsBtn())
@@ -39,4 +39,5 @@ public final class MenuGUI implements RGUIContainer {
     public @NotNull Gui getGui() {
         return gui;
     }
+
 }

@@ -45,12 +45,6 @@
                             <goal>shade</goal>
                         </goals>
                         <configuration>
-                            <relocations>
-                                <relocation>
-                                    <pattern>dev.jorel.commandapi</pattern>
-                                    <shadedPattern>org.regicide.regicideui.commandapi</shadedPattern>
-                                </relocation>
-                            </relocations>
                             <createDependencyReducedPom>false</createDependencyReducedPom>
                             <outputFile>I:\Server\ConcordiaCraft\ConcordiaCraft - 1.20.4\plugins\${project.name}-${project.version}.jar</outputFile>
                         </configuration>
@@ -107,8 +101,9 @@
         </dependency>
         <dependency>
             <groupId>dev.jorel</groupId>
-            <artifactId>commandapi-bukkit-shade</artifactId>
+            <artifactId>commandapi-bukkit-core</artifactId>
             <version>9.3.0</version>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>dev.jorel</groupId>
