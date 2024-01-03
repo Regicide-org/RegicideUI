@@ -25,7 +25,7 @@ public final class InfoBtn extends AbstractItem {
 
         m.setCustomModelData(102);
 
-        List<String> loreText = RegicideUI.l().c().getStringList("menu-button-towns-lore");
+        List<String> loreText = RegicideUI.l().c().getStringList("menu-button-info-lore");
         List<Component> lore = new ArrayList<>();
         for (String s : loreText)
             lore.add(MiniMessage.miniMessage().deserialize("<i:false><white>"+s+"</white></i>"));
