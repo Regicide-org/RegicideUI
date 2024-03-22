@@ -6,7 +6,6 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.regicide.regicideui.commands.*;
-import org.regicide.regicideui.ui.GUIManager;
 import org.regicide.regicideui.utils.CustomConfig;
 
 import java.io.File;
@@ -66,12 +65,8 @@ public final class RegicideUI extends JavaPlugin {
         CommandAPI.registerCommand(HrefsCMD.class);
         CommandAPI.registerCommand(DiscordCMD.class);
         CommandAPI.registerCommand(VkCMD.class);
+        CommandAPI.registerCommand(ProfileCMD.class);
         getLogger().info("All commands successfully loaded!");
-
-        getLogger().info("");
-        getLogger().info("Loading GUIs");
-        GUIManager.load();
-        getLogger().info("All GUIs successfully loaded!");
     }
 
     /**

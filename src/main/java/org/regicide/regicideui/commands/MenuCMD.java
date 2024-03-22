@@ -8,7 +8,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import org.regicide.regicideui.RegicideUI;
-import org.regicide.regicideui.ui.GUIManager;
+import org.regicide.regicideui.ui.menu.MenuGUI;
 import xyz.xenondevs.invui.window.Window;
 
 
@@ -26,7 +26,7 @@ public final class MenuCMD {
 
         Window window = Window.merged()
                 .setViewer((Player) sender)
-                .setGui(GUIManager.getGui("menu"))
+                .setGui(new MenuGUI(null).getGui())
                 .setTitle(RegicideUI.l().c().getString("menu-title"))
                 .build();
         window.open();

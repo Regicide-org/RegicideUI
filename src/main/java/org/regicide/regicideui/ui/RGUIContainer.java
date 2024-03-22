@@ -2,6 +2,7 @@ package org.regicide.regicideui.ui;
 
 import org.jetbrains.annotations.NotNull;
 import xyz.xenondevs.invui.gui.Gui;
+import xyz.xenondevs.invui.window.Window;
 
 public interface RGUIContainer {
     /**
@@ -9,4 +10,6 @@ public interface RGUIContainer {
      */
     @NotNull
     Gui getGui();
+
+    Window getPrevWindow();
 }

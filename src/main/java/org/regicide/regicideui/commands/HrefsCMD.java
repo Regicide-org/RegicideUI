@@ -7,7 +7,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import org.regicide.regicideui.RegicideUI;
-import org.regicide.regicideui.ui.GUIManager;
+import org.regicide.regicideui.ui.hrefs.HrefsGUI;
 import xyz.xenondevs.invui.window.Window;
 
 @Command("hrefs")
@@ -23,8 +23,8 @@ public final class HrefsCMD {
 
         Window window = Window.merged()
                 .setViewer((Player) sender)
-                .setGui(GUIManager.getGui("hrefs"))
                 .setTitle(RegicideUI.l().c().getString("hrefs-title"))
+                .setGui(new HrefsGUI(null).getGui())
                 .build();
         window.open();
     }

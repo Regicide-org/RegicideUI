@@ -16,7 +16,7 @@ localization: ru-RU
 
 
 # Opens a player's profile when clicked on it.
-open-player-profile-on-click: True
+open-player-profile-on-click: True // TODO (RIGHT CLICK!!)
 
 ############################################################
 # +------------------------------------------------------+ #
@@ -37,7 +37,7 @@ discord-group-url: "https://discord.com/invite/D7JdwX7"
 #
 # NOTE: Vault plugin required!
 # Vault: https://www.spigotmc.org/resources/vault.34315/
-show-own-balance: True
+show-own-balance: True // TODO
 
 ############################################################
 # +------------------------------------------------------+ #

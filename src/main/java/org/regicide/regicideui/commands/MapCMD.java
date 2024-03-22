@@ -10,8 +10,8 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import org.regicide.regicideui.RegicideUI;
 
-@Command("map")
-@Alias({"mapurl", "webmap"})
+@Command("mapurl")
+@Alias({"webmap"})
 public final class  MapCMD {
     @Default
     @Permission("regicideui.command.map")

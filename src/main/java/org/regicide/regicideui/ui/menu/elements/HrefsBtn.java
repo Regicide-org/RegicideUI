@@ -11,11 +11,12 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
 import org.regicide.regicideui.RegicideUI;
-import org.regicide.regicideui.ui.GUIManager;
+import org.regicide.regicideui.ui.hrefs.HrefsGUI;
 import xyz.xenondevs.invui.item.ItemProvider;
 import xyz.xenondevs.invui.item.builder.ItemBuilder;
 import xyz.xenondevs.invui.item.impl.AbstractItem;
 import xyz.xenondevs.invui.window.Window;
+import xyz.xenondevs.invui.window.WindowManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,7 +59,7 @@ public final class HrefsBtn extends AbstractItem {
 
             Window window = Window.merged()
                     .setViewer(player)
-                    .setGui(GUIManager.getGui("hrefs"))
+                    .setGui(new HrefsGUI(WindowManager.getInstance().getOpenWindow(player)).getGui())
                     .setTitle(RegicideUI.l().c().getString("hrefs-title"))
                     .build();
             window.open();

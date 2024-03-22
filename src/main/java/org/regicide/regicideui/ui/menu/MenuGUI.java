@@ -5,12 +5,13 @@ import org.regicide.regicideui.ui.menu.elements.*;
 import org.regicide.regicideui.ui.RGUIContainer;
 import org.regicide.regicideui.ui.universal.ExitBtn;
 import xyz.xenondevs.invui.gui.Gui;
+import xyz.xenondevs.invui.window.Window;
 
 public final class MenuGUI implements RGUIContainer {
 
     private final Gui gui;
 
-    public MenuGUI() {
+    public MenuGUI(@NotNull final Window prevWindow) {
         this.gui = Gui.normal()
                 .setStructure(
                         ". . . . . . . . .",
@@ -40,4 +41,8 @@ public final class MenuGUI implements RGUIContainer {
         return gui;
     }
 
+    @Override
+    public Window getPrevWindow() {
+        return null;
+    }
 }

@@ -27,24 +27,16 @@ public final class ExitBtn extends AbstractItem {
         ItemStack i = new ItemStack(Material.FLINT_AND_STEEL);
         ItemMeta m = i.getItemMeta();
 
-
-
         m.setCustomModelData(101);
 
         String titleText = RegicideUI.l().c().getString("button-exit-name");
-        Component title = MiniMessage.miniMessage().deserialize("<i:false><white>"+titleText+"</white></i>");
+        Component title = MiniMessage.miniMessage().deserialize("<i:false><white>" + titleText + "</white></i>");
         m.displayName(title);
-
-
-
         List<String> loreText = RegicideUI.l().c().getStringList("button-exit-lore");
         List<Component> lore = new ArrayList<>();
         for (String s : loreText)
-            lore.add(MiniMessage.miniMessage().deserialize("<i:false><white>"+s+"</white></i>"));
+            lore.add(MiniMessage.miniMessage().deserialize("<i:false><white>" + s + "</white></i>"));
         m.lore(lore);
-
-
-
         i.setItemMeta(m);
         return new ItemBuilder(i);
     }
