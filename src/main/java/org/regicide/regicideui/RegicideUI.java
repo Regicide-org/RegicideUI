@@ -2,13 +2,15 @@ package org.regicide.regicideui;
 
 import dev.jorel.commandapi.CommandAPI;
 import net.milkbowl.vault.economy.Economy;
+import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.regicide.regicideui.commands.*;
-import org.regicide.regicideui.utils.CustomConfig;
+import org.regicide.regicideui.utils.CustomConfiguration;
 
 import java.io.File;
+import java.io.IOException;
 
 /**
  * Main plugin class.
@@ -18,24 +20,29 @@ public final class RegicideUI extends JavaPlugin {
     private static Economy econ = null;
 
     private static RegicideUI instance;
-    private static CustomConfig localization;
+    private static CustomConfiguration localization;
+    private static Config config;
 
     @Override
     public void onLoad() {
 
     }
 
-    @SuppressWarnings("UnstableApiUsage")
+    /**
+     * Plugin startup logic.
+     */
     @Override
     public void onEnable() {
-        // Plugin startup logic
+        getLogger().info("");
         instance = this;
         //RegicideUIPlayerManager.loadAllPlayers();
 
-        if (!new File(getDataFolder(), "config.yml").exists()) {
-            saveDefaultConfig();
-            getLogger().info("Configuration was successfully created and loaded!");
-        } else getLogger().info("Configuration was successfully loaded!");
+        // Config
+        if (!configLoad()) {
+            this.getServer().getPluginManager().disablePlugin(this);
+            return;
+        }
+        getLogger().info("Configuration was successfully loaded!");
 
         if (getConfig().getBoolean("vault")) {
             Plugin vault = getServer().getPluginManager().getPlugin("Vault");
@@ -49,8 +56,9 @@ public final class RegicideUI extends JavaPlugin {
             }
         }
 
+        // TODO: переписать этот позор, используя Internalization (https://docs.papermc.io/velocity/dev/component-api/i18n)
         String localizationName = getConfig().getString("localization");
-        localization = new CustomConfig("localization" + File.separator + localizationName + ".yml");
+        localization = new CustomConfiguration("localization" + File.separator + localizationName + ".yml");
         getLogger().info(localizationName + " was successfully loaded!");
 
         getLogger().info("");
@@ -75,13 +83,27 @@ public final class RegicideUI extends JavaPlugin {
     public void reload() {
         //RegicideUIPlayerManager.loadAllPlayers();
         this.reloadConfig();
-        localization = new CustomConfig("localization" + File.separator + getConfig().getString("localization") + ".yml");
+        localization = new CustomConfiguration("localization" + File.separator + getConfig().getString("localization") + ".yml");
         getLogger().info("Plugin was successfully reload!");
     }
 
+    /**
+     * Plugin shutdown logic.
+     */
     @Override
     public void onDisable() {
-        // Plugin shutdown logic
+    }
+
+    private boolean configLoad() {
+        try {
+            config = new Config();
+        } catch (IOException | InvalidConfigurationException e) {
+            getLogger().severe("Critical error when creating the configuration file! Details below:");
+            e.printStackTrace();
+            getLogger().severe("RegicideUI will not work without configuration. Shutdown.");
+            return false;
+        }
+        return true;
     }
 
     private void setupEconomy() {
@@ -108,7 +130,14 @@ public final class RegicideUI extends JavaPlugin {
     }
 
     /**
-     * @return The plugin's loaded localization.
+     * @return The localization of the {@link RegicideUI}.
      */
-    public static CustomConfig l() { return localization; }
+    public static CustomConfiguration l() { return localization; }
+
+    /**
+     * @return The configuration of the {@link RegicideUI}.
+     */
+    public static Config config() {
+        return config;
+    }
 }

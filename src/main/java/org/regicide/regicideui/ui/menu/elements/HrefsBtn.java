@@ -1,9 +1,10 @@
 package org.regicide.regicideui.ui.menu.elements;
 
+import net.kyori.adventure.sound.Sound;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Material;
-import org.bukkit.Sound;
+import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
@@ -55,7 +56,6 @@ public final class HrefsBtn extends AbstractItem {
     @Override
     public void handleClick(@NotNull ClickType clickType, @NotNull Player player, @NotNull InventoryClickEvent event) {
         if (clickType.isLeftClick()) {
-            player.playSound(player, Sound.UI_BUTTON_CLICK, 1, 1);
 
             Window window = Window.merged()
                     .setViewer(player)
@@ -63,6 +63,15 @@ public final class HrefsBtn extends AbstractItem {
                     .setTitle(RegicideUI.l().c().getString("hrefs-title"))
                     .build();
             window.open();
+
+            net.kyori.adventure.sound.Sound s = net.kyori.adventure.sound.Sound.sound(
+                    new NamespacedKey(RegicideUI.config().getOpenMenuPathSpace(), RegicideUI.config().getOpenMenuPathName()),
+                    Sound.Source.PLAYER,
+                    RegicideUI.config().getOpenMenuVolume(),
+                    RegicideUI.config().getOpenMenuPitch()
+            );
+            player.playSound(s);
+
         }
     }
 }

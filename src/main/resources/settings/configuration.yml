@@ -1,47 +1,66 @@
+version:
+  # This is the current version of plugin. Please do not edit.
+  version: "${project.version}"
+
 ############################################################
 # +------------------------------------------------------+ #
-# |                    Main config                       | #
+# |                       Language                       | #
 # +------------------------------------------------------+ #
 ############################################################
-# Will RegicideUI use Vault plugin.
-vault: True
+language:
+  # Plugin's default localization.
+  default-localization: "ru_ru"
 
-# Will RegicideUI use ProtocolLib plugin.
-protocol-lib: true
-
-# Plugin's localization.
-#
-# NOTE: Default localization is en_US.
-localization: ru-RU
-
-
-# Opens a player's profile when clicked on it.
-open-player-profile-on-click: True // TODO (RIGHT CLICK!!)
+  # If set to True, players will first receive localized messages corresponding to the
+  # localization of their client and if the localization is not in the plugin, then they
+  # will receive all data from the language specified in the default-localization parameters.
+  #
+  # If set to False, the default localization specified in "default-localization"
+  # is applied to all players.
+  client-based: false
 
 ############################################################
 # +------------------------------------------------------+ #
 # |                      HUD & GUI                       | #
 # +------------------------------------------------------+ #
 ############################################################
+GUI:
+  links:
+    # URL of the web-map, that will be shown in menu GUI.
+    map: "http://localhost:8123/"
 
-# URL of the web-map, that will be shown in menu GUI.
-map-url: "http://localhost:8123/"
+    # URL of the VK group, that will be shown in hrefs GUI.
+    vk-group: "https://vk.com/concordiacraft"
 
-# URL of the VK group, that will be shown in hrefs GUI.
-vk-group-url: "https://vk.com/concordiacraft"
+    # URL of the Discord group, that will be shown in hrefs GUI.
+    discord: "https://discord.com/invite/D7JdwX7"
 
-# URL of the Discord group, that will be shown in hrefs GUI.
-discord-group-url: "https://discord.com/invite/D7JdwX7"
+  # Shows the player's balance at the bottom right of the screen.
+  #
+  # NOTE: Vault plugin required!
+  # Vault: https://www.spigotmc.org/resources/vault.34315/
+  show-own-balance: True // TODO
 
-# Shows the player's balance at the bottom right of the screen.
-#
-# NOTE: Vault plugin required!
-# Vault: https://www.spigotmc.org/resources/vault.34315/
-show-own-balance: True // TODO
+  # Opens a player's profile when clicked on it.
+  open-player-profile-on-click: True // TODO (RIGHT CLICK!!)
 
-############################################################
-# +------------------------------------------------------+ #
-# |                      Resources                       | #
-# +------------------------------------------------------+ #
-############################################################
-
+  # Sounds of interaction with various UI elements.
+  sounds:
+    exit-button:
+      path:
+        space: "minecraft"
+        name: "block.note_block.pling"
+      pitch: 1.0
+      volume: 1.0
+    back-button:
+      path:
+        space: "minecraft"
+        name: "block.note_block.pling"
+      pitch: 1.5
+      volume: 1.0
+    open-menu:
+      path:
+        space: "minecraft"
+        name: "ui.button.click"
+      pitch: 1.5
+      volume: 1.0

@@ -1,8 +1,9 @@
 package org.regicide.regicideui.ui.menu;
 
 import org.jetbrains.annotations.NotNull;
-import org.regicide.regicideui.ui.menu.elements.*;
+import org.regicide.regicideui.ui.RGUIBackable;
 import org.regicide.regicideui.ui.RGUIContainer;
+import org.regicide.regicideui.ui.menu.elements.*;
 import org.regicide.regicideui.ui.universal.ExitBtn;
 import xyz.xenondevs.invui.gui.Gui;
 import xyz.xenondevs.invui.window.Window;
@@ -11,7 +12,7 @@ public final class MenuGUI implements RGUIContainer {
 
     private final Gui gui;
 
-    public MenuGUI(@NotNull final Window prevWindow) {
+    public MenuGUI() {
         this.gui = Gui.normal()
                 .setStructure(
                         ". . . . . . . . .",
@@ -39,10 +40,5 @@ public final class MenuGUI implements RGUIContainer {
 
     public @NotNull Gui getGui() {
         return gui;
-    }
-
-    @Override
-    public Window getPrevWindow() {
-        return null;
     }
 }

@@ -3,6 +3,8 @@ package org.regicide.regicideui.commands;
 import dev.jorel.commandapi.annotations.Command;
 import dev.jorel.commandapi.annotations.Default;
 import dev.jorel.commandapi.annotations.Permission;
+import net.kyori.adventure.sound.Sound;
+import org.bukkit.NamespacedKey;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
@@ -21,11 +23,21 @@ public final class HrefsCMD {
             return;
         }
 
+        Player p = (Player) sender;
+
         Window window = Window.merged()
-                .setViewer((Player) sender)
+                .setViewer(p)
                 .setTitle(RegicideUI.l().c().getString("hrefs-title"))
                 .setGui(new HrefsGUI(null).getGui())
                 .build();
         window.open();
+
+        Sound s = Sound.sound(
+                new NamespacedKey(RegicideUI.config().getOpenMenuPathSpace(), RegicideUI.config().getOpenMenuPathName()),
+                Sound.Source.PLAYER,
+                RegicideUI.config().getOpenMenuVolume(),
+                RegicideUI.config().getOpenMenuPitch()
+        );
+        p.playSound(s);
     }
 }

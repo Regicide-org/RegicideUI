@@ -9,7 +9,7 @@ import org.regicide.regicideui.RegicideUI;
 import java.io.File;
 import java.io.IOException;
 
-public final class CustomConfig {
+public final class CustomConfiguration {
     private final File configFile;
     private final FileConfiguration config;
 
@@ -18,7 +18,7 @@ public final class CustomConfig {
      * @param name The path to the configuration file in plugin data folder and the full name.
      */
     @SuppressWarnings("ResultOfMethodCallIgnored")
-    public CustomConfig(@NotNull final String name) {
+    public CustomConfiguration(@NotNull final String name) {
         configFile = new File(RegicideUI.instance().getDataFolder(), name);
         if (!configFile.exists()) {
             configFile.getParentFile().mkdirs();
