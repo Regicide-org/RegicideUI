@@ -1,12 +1,16 @@
 package org.regicide.regicideui;
 
 import dev.jorel.commandapi.CommandAPI;
+import dev.jorel.commandapi.CommandAPIBukkit;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.plugin.Plugin;
+import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scheduler.BukkitRunnable;
 import org.regicide.regicideui.commands.*;
+import org.regicide.regicideui.listeners.PlayerListener;
 import org.regicide.regicideui.utils.CustomConfiguration;
 
 import java.io.File;
@@ -33,17 +37,18 @@ public final class RegicideUI extends JavaPlugin {
      */
     @Override
     public void onEnable() {
-        getLogger().info("");
         instance = this;
         //RegicideUIPlayerManager.loadAllPlayers();
 
         // Config
+        getLogger().info("");
         if (!configLoad()) {
             this.getServer().getPluginManager().disablePlugin(this);
             return;
         }
         getLogger().info("Configuration was successfully loaded!");
 
+        getLogger().info("");
         if (getConfig().getBoolean("vault")) {
             Plugin vault = getServer().getPluginManager().getPlugin("Vault");
             if (vault != null) {
@@ -62,18 +67,11 @@ public final class RegicideUI extends JavaPlugin {
         getLogger().info(localizationName + " was successfully loaded!");
 
         getLogger().info("");
-        getLogger().info("Loading listeners...");
+        listenersLoad();
         getLogger().info("All listeners successfully loaded!");
 
         getLogger().info("");
-        getLogger().info("Loading commands...");
-        CommandAPI.registerCommand(RegicideuiCMD.class);
-        CommandAPI.registerCommand(MenuCMD.class);
-        CommandAPI.registerCommand(MapCMD.class);
-        CommandAPI.registerCommand(HrefsCMD.class);
-        CommandAPI.registerCommand(DiscordCMD.class);
-        CommandAPI.registerCommand(VkCMD.class);
-        CommandAPI.registerCommand(ProfileCMD.class);
+        commandsLoad();
         getLogger().info("All commands successfully loaded!");
     }
 
@@ -104,6 +102,33 @@ public final class RegicideUI extends JavaPlugin {
             return false;
         }
         return true;
+    }
+
+    private void listenersLoad() {
+        PluginManager pm = getServer().getPluginManager();
+        pm.registerEvents(new PlayerListener(), this);
+    }
+
+    private void commandsLoad() {
+        CommandAPI.registerCommand(RegicideuiCMD.class);
+        CommandAPI.registerCommand(MenuCMD.class);
+        CommandAPI.registerCommand(MapCMD.class);
+        CommandAPI.registerCommand(HrefsCMD.class);
+        CommandAPI.registerCommand(DiscordCMD.class);
+        CommandAPI.registerCommand(VkCMD.class);
+        ProfileCMD.register();
+
+        if (config().isUseCustomHelp()) {
+            // TODO доделать
+            new BukkitRunnable() {
+                @Override
+                public void run() {
+                    CommandAPIBukkit.unregister("help", false, true);
+                }
+            }.runTaskLater(this, 0);
+
+            HelpCMD.register();
+        }
     }
 
     private void setupEconomy() {

@@ -6,6 +6,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 /**
  * Configuration of the {@link RegicideUI}.
@@ -30,6 +31,9 @@ public final class Config {
     private final String openMenuPathSpace;
     private final float openMenuPitch;
     private final float openMenuVolume;
+
+    private final boolean useCustomHelp;
+    private final List<String> helpUnregistered;
 
     public Config() throws IOException, InvalidConfigurationException {
         File file;
@@ -66,6 +70,9 @@ public final class Config {
         this.openMenuPathName = fileConfig.getString("GUI.sounds.open-menu.path.name");
         this.openMenuPitch = (float) fileConfig.getDouble("GUI.sounds.open-menu.pitch");
         this.openMenuVolume = (float) fileConfig.getDouble("GUI.sounds.open-menu.volume");
+
+        this.useCustomHelp = fileConfig.getBoolean("GUI.help.use-custom-help");
+        this.helpUnregistered = fileConfig.getStringList("GUI.help.unregister-help");
     }
 
     public String getDefaultLocalization() {
@@ -134,5 +141,13 @@ public final class Config {
 
     public float getOpenMenuVolume() {
         return openMenuVolume;
+    }
+
+    public boolean isUseCustomHelp() {
+        return useCustomHelp;
+    }
+
+    public List<String> getHelpUnregistered() {
+        return helpUnregistered;
     }
 }

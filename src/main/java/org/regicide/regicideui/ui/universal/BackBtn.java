@@ -26,6 +26,7 @@ public final class BackBtn extends AbstractItem {
     public BackBtn(@NotNull final Window prevWindow) {
         this.prevWindow = prevWindow;
     }
+
     @Override
     public ItemProvider getItemProvider() {
         ItemStack i = new ItemStack(Material.FLINT_AND_STEEL);

@@ -1,8 +1,10 @@
 package org.regicide.regicideui.ui.menu.elements;
 
+import net.kyori.adventure.sound.Sound;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
@@ -13,6 +15,7 @@ import org.regicide.regicideui.RegicideUI;
 import xyz.xenondevs.invui.item.ItemProvider;
 import xyz.xenondevs.invui.item.builder.ItemBuilder;
 import xyz.xenondevs.invui.item.impl.AbstractItem;
+import xyz.xenondevs.invui.window.Window;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,5 +52,22 @@ public final class MarketBtn extends AbstractItem {
 
     @Override
     public void handleClick(@NotNull ClickType clickType, @NotNull Player player, @NotNull InventoryClickEvent event) {
+        if (clickType.isLeftClick()) {
+
+            Sound s = Sound.sound(
+                    new NamespacedKey(RegicideUI.config().getExitButtonPathSpace(), RegicideUI.config().getExitButtonPathName()),
+                    Sound.Source.PLAYER,
+                    RegicideUI.config().getExitButtonVolume(),
+                    RegicideUI.config().getExitButtonPitch()
+            );
+            player.playSound(s);
+
+            player.sendMessage("");
+            player.sendMessage("§lРынок не реализован (и в рамках ПД не подразумевает реализацию!)");
+            player.sendMessage("");
+
+
+            this.getWindows().forEach(Window::close);
+        }
     }
 }

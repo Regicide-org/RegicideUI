@@ -71,7 +71,6 @@ public final class HrefsBtn extends AbstractItem {
                     RegicideUI.config().getOpenMenuPitch()
             );
             player.playSound(s);
-
         }
     }
 }

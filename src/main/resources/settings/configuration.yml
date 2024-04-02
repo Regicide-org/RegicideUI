@@ -27,7 +27,7 @@ language:
 GUI:
   links:
     # URL of the web-map, that will be shown in menu GUI.
-    map: "http://localhost:8123/"
+    map: "http://localhost:8080"
 
     # URL of the VK group, that will be shown in hrefs GUI.
     vk-group: "https://vk.com/concordiacraft"
@@ -55,7 +55,7 @@ GUI:
     back-button:
       path:
         space: "minecraft"
-        name: "block.note_block.pling"
+        name: "ui.button.click"
       pitch: 1.5
       volume: 1.0
     open-menu:
@@ -64,3 +64,15 @@ GUI:
         name: "ui.button.click"
       pitch: 1.5
       volume: 1.0
+
+  # Will server use custom help from RegicideUI.
+  help:
+    use-custom-help: true
+
+    # Commands that will be unregistered in order for the server to use help from RegicideUI.
+    #
+    # NOTE: Will only unregister the commands if the use-custom-help flag set is true.
+    unregister-help:
+      - "essentials:help"
+      - "bukkit:help"
+      - "minecraft:help"

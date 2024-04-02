@@ -21,7 +21,7 @@ public final class  MapCMD {
             return;
         }
 
-        String url = RegicideUI.instance().getConfig().getString("map-url");
+        String url = RegicideUI.config().getMapLink();
         String msgText = RegicideUI.l().c().getString("get-map-message");
         String hoverText = RegicideUI.l().c().getString("get-map-hover");
         String msg = "<hover:show_text:'"+ hoverText +"'><click:open_url:'"+ url +"'>"+msgText+"</click></hover>";

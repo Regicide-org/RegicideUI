@@ -1,7 +1,12 @@
 localization: "ru-RU"
 
+message-don't-have-permission-to-perform-command: "΀ <#D82625>У Вас недостаточно прав для использования данной команды!"
+message-player-never-logged-error: "΀ <#D82625>Данный игрок никогда не заходил на сервер ConcordiaCraft!"
+
 menu-title: "§fށ"
+profile-title: "Профиль игрока"
 hrefs-title: "§fނ"
+help-title: "§fބ"
 button-info-name: "<bold>Инфо</bold>"
 button-exit-name: "<bold>Выйти</bold>"
 button-exit-lore: [
@@ -105,6 +110,12 @@ hrefs-button-info-lore: [
   "",
   "<#FCFC00>Здесь приведены все ссылки на социальные",
   "<#FCFC00>сети, в которых наш сервер ведёт свою активность"
+]
+
+profile-button-info-lore: [
+  "",
+  "<#FCFC00>Здесь представлена основная информация",
+  "<#FCFC00>о рассматриваемом пользователе"
 ]
 
 get-map-message: "<#64FBFB>\n→ [Нажмите сюда, чтобы открыть карту]\n"

@@ -1,34 +1,83 @@
 package org.regicide.regicideui.commands;
 
-import dev.jorel.commandapi.annotations.Command;
-import dev.jorel.commandapi.annotations.Default;
-import dev.jorel.commandapi.annotations.Permission;
-import dev.jorel.commandapi.annotations.arguments.AStringArgument;
-import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
-import org.jetbrains.annotations.NotNull;
 
-@Command("profile")
+import dev.jorel.commandapi.CommandAPICommand;
+import dev.jorel.commandapi.arguments.StringArgument;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.minimessage.MiniMessage;
+import org.bukkit.OfflinePlayer;
+import org.regicide.regicideui.RegicideUI;
+import org.regicide.regicideui.ui.profile.ProfileGUI;
+import xyz.xenondevs.invui.window.Window;
+
 public final class ProfileCMD {
 
-    @Default
-    @Permission("regicideui.command.profile")
-    public static void profile(@NotNull final CommandSender sender) {
-        if (!(sender instanceof Player)) {
-            sender.sendMessage("Only players have profiles!");
-            return;
-        }
+    @SuppressWarnings("ConstantConditions")
+    public static void register() {
 
-        sender.sendMessage("TODO: open profile window for " + sender.getName());
-    }
+        // TODO Вывод онлайн-игроков
+        new CommandAPICommand("profile")
+                .withOptionalArguments(new StringArgument("name"))
+                .withPermission("regicideui.command.profile")
+                .executesPlayer((pExecutor, args) -> {
 
-    @Default
-    public static void profileOther(@NotNull final CommandSender sender, @AStringArgument String playerName) {
-        if (!(sender instanceof Player)) {
-            sender.sendMessage("TODO: send profile info for " + playerName);
-            return;
-        }
+                    String name = (String) args.get("name");
 
-        sender.sendMessage("TODO: open profile window for " + playerName);
+                    // Other profile
+                    if (name != null) {
+                        OfflinePlayer pTarget = RegicideUI.instance().getServer().getOfflinePlayerIfCached(name);
+
+                        if (pTarget == null) {
+                            String msgText = RegicideUI.l().c().getString("message-player-never-logged-error");
+                            Component msg = MiniMessage.miniMessage().deserialize("<i:false><white>"+msgText+"</white></i>");
+                            pExecutor.sendMessage(msg);
+
+                            return;
+                        }
+
+                        Window window = Window.merged()
+                                .setViewer(pExecutor)
+                                .setTitle(RegicideUI.l().c().getString("profile-title"))
+                                .setGui(new ProfileGUI(null, pExecutor, pExecutor).getGui())
+                                .build();
+                        window.open();
+
+                        // Self profile
+                    } else {
+
+                        if (!(pExecutor.hasPermission("regicideui.command.profile.other"))) {
+
+                            String msgText = RegicideUI.l().c().getString("message-don't-have-permission-to-perform-command");
+                            Component msg = MiniMessage.miniMessage().deserialize("<i:false><white>"+msgText+"</white></i>");
+                            pExecutor.sendMessage(msg);
+                            return;
+                        }
+
+                        Window window = Window.merged()
+                                .setViewer(pExecutor)
+                                .setTitle(RegicideUI.l().c().getString("profile-title"))
+                                .setGui(new ProfileGUI(null, pExecutor, pExecutor).getGui())
+                                .build();
+                        window.open();
+                    }
+                })
+                .executesConsole((sender, args) -> {
+                    String name = (String) args.get("name");
+                    if (name == null)
+                        RegicideUI.instance().getLogger().info("The console has no profile!");
+                    else
+                        // TODO
+                    {
+                        OfflinePlayer pTarget = RegicideUI.instance().getServer().getOfflinePlayerIfCached(name);
+
+                        if (pTarget == null) {
+                            sender.sendMessage("This player has never logged on the server!");
+                            return;
+                        }
+
+                        RegicideUI.instance().getLogger().info("Вывод данных об игроке " + name);
+                    }
+                })
+                .register();
     }
 }
