@@ -7,7 +7,7 @@ import org.jetbrains.annotations.NotNull;
 import org.regicide.regicideui.objects.ui.ContainerGUI;
 import org.regicide.regicideui.objects.ui.DefaultElementGUI;
 
-public final class NationsBtn extends DefaultElementGUI {
+public class NationsBtn extends DefaultElementGUI {
 
     public NationsBtn(@NotNull final ContainerGUI container) {
         super(container, "ui.element.menu.button.nations.name", "ui.element.menu.button.nations.lore", 109);

@@ -1,4 +1,4 @@
-package org.regicide.regicideui.objects.ui.menu;
+package org.regicide.regicideui.objects.ui.universal;
 
 import net.kyori.adventure.sound.Sound;
 import org.bukkit.NamespacedKey;
@@ -14,7 +14,7 @@ import xyz.xenondevs.invui.window.WindowManager;
 import java.util.Objects;
 
 
-public final class ExitBtn extends DefaultElementGUI {
+public class ExitBtn extends DefaultElementGUI {
 
     private final ContainerGUI container;
 

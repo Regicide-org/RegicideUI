@@ -7,7 +7,7 @@ import org.jetbrains.annotations.NotNull;
 import org.regicide.regicideui.objects.ui.ContainerGUI;
 import org.regicide.regicideui.objects.ui.DefaultElementGUI;
 
-public final class TownsBtn extends DefaultElementGUI {
+public class TownsBtn extends DefaultElementGUI {
 
     public TownsBtn(@NotNull final ContainerGUI container) {
         super(container, "ui.element.menu.button.towns.name", "ui.element.menu.button.towns.lore", 108);

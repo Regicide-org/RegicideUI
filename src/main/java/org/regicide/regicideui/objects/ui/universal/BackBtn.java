@@ -1,4 +1,4 @@
-package org.regicide.regicideui.objects.ui.menu;
+package org.regicide.regicideui.objects.ui.universal;
 
 import net.kyori.adventure.sound.Sound;
 import org.bukkit.NamespacedKey;
@@ -10,15 +10,20 @@ import org.regicide.regicideui.RegicideUI;
 import org.regicide.regicideui.objects.ui.ContainerGUI;
 import org.regicide.regicideui.objects.ui.DefaultElementGUI;
 import xyz.xenondevs.invui.window.Window;
+import xyz.xenondevs.invui.window.WindowManager;
 
-public class DonateBtn extends DefaultElementGUI {
+import java.util.Objects;
 
-    public DonateBtn(@NotNull final ContainerGUI container) {
-        super(container, "ui.element.menu.button.donate.name", "ui.element.menu.button.donate.lore", 103);
+public class BackBtn extends DefaultElementGUI {
+    private final Window prevWindow;
+    public BackBtn(@NotNull final Window prevWindow, @NotNull final ContainerGUI container) {
+        super(container, "ui.element.universal.button.back.name", "ui.element.universal.button.back.lore", 98);
+        this.container = container;
+        this.prevWindow = prevWindow;
     }
 
     @Override
-    public void handleClick(@NotNull ClickType clickType, @NotNull Player player, @NotNull InventoryClickEvent event) {
+    public void handleClick(@NotNull ClickType clickType, @NotNull Player player, @NotNull InventoryClickEvent inventoryClickEvent) {
         if (clickType.isLeftClick()) {
 
             Sound s = Sound.sound(
@@ -27,12 +32,8 @@ public class DonateBtn extends DefaultElementGUI {
                     RegicideUI.config().getExitButtonVolume(),
                     RegicideUI.config().getExitButtonPitch()
             );
+            prevWindow.open();
             player.playSound(s);
-            player.sendMessage("");
-            player.sendMessage("§lДонат не реализован (и в рамках ПД не подразумевает реализацию!)");
-            player.sendMessage("");
-
-            this.getWindows().forEach(Window::close);
         }
     }
 }

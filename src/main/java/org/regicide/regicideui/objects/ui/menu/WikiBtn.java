@@ -13,7 +13,7 @@ import org.regicide.regicideui.objects.ui.DefaultElementGUI;
 import org.regicide.regicideui.objects.ui.help.Help;
 import xyz.xenondevs.invui.window.Window;
 
-public final class WikiBtn extends DefaultElementGUI {
+public class WikiBtn extends DefaultElementGUI {
 
     private final ContainerGUI container;
 

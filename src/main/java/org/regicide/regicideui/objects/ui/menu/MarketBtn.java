@@ -13,7 +13,7 @@ import xyz.xenondevs.invui.window.WindowManager;
 
 import java.util.Objects;
 
-public final class MarketBtn extends DefaultElementGUI {
+public class MarketBtn extends DefaultElementGUI {
 
     private final ContainerGUI container;
 

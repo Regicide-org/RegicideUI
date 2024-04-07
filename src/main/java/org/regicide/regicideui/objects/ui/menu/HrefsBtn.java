@@ -12,21 +12,23 @@ import org.regicide.regicideui.objects.ui.ContainerGUI;
 import org.regicide.regicideui.objects.ui.DefaultElementGUI;
 import org.regicide.regicideui.objects.ui.hrefs.Hrefs;
 import xyz.xenondevs.invui.window.Window;
+import xyz.xenondevs.invui.window.WindowManager;
 
-public final class HrefsBtn extends DefaultElementGUI {
+public class HrefsBtn extends DefaultElementGUI {
 
     public HrefsBtn(@NotNull final ContainerGUI container) {
         super(container, "ui.element.menu.button.hrefs.name", "ui.element.menu.button.hrefs.lore", 104);
         this.container = container;
     }
 
+    @SuppressWarnings("ConstantConditions")
     @Override
     public void handleClick(@NotNull ClickType clickType, @NotNull Player player, @NotNull InventoryClickEvent event) {
         if (clickType.isLeftClick()) {
 
             Window window = Window.merged()
                     .setViewer(player)
-                    .setGui(new Hrefs(player).getGui())
+                    .setGui(new Hrefs(WindowManager.getInstance().getOpenWindow(player), player).getGui())
                     .setTitle(Localization.get("ui.element.hrefs.title", container.getViewer().locale().toString()))
                     .build();
             window.open();

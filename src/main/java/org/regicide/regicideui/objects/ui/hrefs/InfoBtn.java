@@ -1,4 +1,4 @@
-package org.regicide.regicideui.objects.ui.menu;
+package org.regicide.regicideui.objects.ui.hrefs;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
@@ -8,13 +8,12 @@ import org.regicide.regicideui.objects.ui.ContainerGUI;
 import org.regicide.regicideui.objects.ui.DefaultElementGUI;
 
 public class InfoBtn extends DefaultElementGUI {
-
-    public InfoBtn(@NotNull final ContainerGUI container) {
-        super(container, "ui.element.universal.button.info.name", "ui.element.menu.button.info.lore", 102);
+    public InfoBtn(@NotNull ContainerGUI container) {
+        super(container, "ui.element.universal.button.info.name", "ui.element.hrefs.button.info.lore", 99);
     }
 
     @Override
-    public void handleClick(@NotNull ClickType clickType, @NotNull Player player, @NotNull InventoryClickEvent event) {
+    public void handleClick(@NotNull ClickType clickType, @NotNull Player player, @NotNull InventoryClickEvent inventoryClickEvent) {
 
     }
 }

@@ -13,7 +13,7 @@ import org.regicide.regicideui.objects.ui.DefaultElementGUI;
 import org.regicide.regicideui.objects.ui.profile.Profile;
 import xyz.xenondevs.invui.window.Window;
 
-public final class ProfileBtn extends DefaultElementGUI {
+public class ProfileBtn extends DefaultElementGUI {
 
     private final ContainerGUI container;
 

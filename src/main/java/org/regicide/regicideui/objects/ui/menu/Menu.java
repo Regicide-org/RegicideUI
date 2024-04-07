@@ -3,9 +3,10 @@ package org.regicide.regicideui.objects.ui.menu;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import org.regicide.regicideui.objects.ui.ContainerGUI;
+import org.regicide.regicideui.objects.ui.universal.ExitBtn;
 import xyz.xenondevs.invui.gui.Gui;
 
-public final class Menu extends ContainerGUI {
+public class Menu extends ContainerGUI {
     public Menu(@NotNull Player viewer) {
         super(viewer);
     }
