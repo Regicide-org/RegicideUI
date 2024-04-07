@@ -1,31 +1,35 @@
 package org.regicide.regicideui.commands;
 
-import dev.jorel.commandapi.annotations.Alias;
-import dev.jorel.commandapi.annotations.Command;
-import dev.jorel.commandapi.annotations.Default;
-import dev.jorel.commandapi.annotations.Permission;
+import dev.jorel.commandapi.CommandAPICommand;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.jetbrains.annotations.NotNull;
+import org.regicide.regicideui.Localization;
 import org.regicide.regicideui.RegicideUI;
 
-@Command("discord")
-@Alias("ds")
+import java.text.MessageFormat;
+
 public final class DiscordCMD {
-    @Default
-    @Permission("regicideui.command.discord")
-    public static void discord(@NotNull final CommandSender sender) {
-        if (!(sender instanceof Player)) {
-            sender.sendMessage("Discord group: " + RegicideUI.instance().getConfig().getString("discord-group-url"));
-            return;
-        }
+    public static void register() {
+        new CommandAPICommand("discord")
+                .withAliases("ds")
+                .withPermission("regicideui.command.discord")
+                .executes(executor -> {
+                    CommandSender sender = executor.sender();
 
-        String url = RegicideUI.instance().getConfig().getString("discord-group-url");
-        String msgText = RegicideUI.l().c().getString("get-discord-message");
-        String hoverText = RegicideUI.l().c().getString("get-discord-hover");
-        String msg = "<hover:show_text:'"+ hoverText +"'><click:open_url:'"+ url +"'>"+msgText+"</click></hover>";
+                    String dsLink = RegicideUI.config().getDiscordLink();
 
-        sender.sendMessage(MiniMessage.miniMessage().deserialize(msg));
+                    if (!(sender instanceof Player)) {
+                        sender.sendMessage("Discord group: " + dsLink);
+
+                        return;
+                    }
+                    String msg = Localization.get("message.button.open.discord", ((Player) sender).locale().toString());
+                    msg = MessageFormat.format(msg, dsLink);
+
+
+                    sender.sendMessage(MiniMessage.miniMessage().deserialize(msg));
+                })
+                .register();
     }
 }

@@ -9,7 +9,7 @@ version:
 ############################################################
 language:
   # Plugin's default localization.
-  default-localization: "ru_ru"
+  default-localization: "en_US"
 
   # If set to True, players will first receive localized messages corresponding to the
   # localization of their client and if the localization is not in the plugin, then they
@@ -17,7 +17,7 @@ language:
   #
   # If set to False, the default localization specified in "default-localization"
   # is applied to all players.
-  client-based: false
+  client-based: true
 
 ############################################################
 # +------------------------------------------------------+ #
@@ -42,7 +42,7 @@ GUI:
   show-own-balance: True // TODO
 
   # Opens a player's profile when clicked on it.
-  open-player-profile-on-click: True // TODO (RIGHT CLICK!!)
+  open-player-profile-on-click: true
 
   # Sounds of interaction with various UI elements.
   sounds:

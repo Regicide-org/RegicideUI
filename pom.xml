@@ -75,6 +75,10 @@
             <url>https://jitpack.io</url>
         </repository>
         <repository>
+            <id>glaremasters repo</id>
+            <url>https://repo.glaremasters.me/repository/towny/</url>
+        </repository>
+        <repository>
             <id>xenondevs</id>
             <url>https://repo.xenondevs.xyz/releases</url>
         </repository>
@@ -94,12 +98,6 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>xyz.xenondevs.invui</groupId>
-            <artifactId>invui</artifactId>
-            <version>1.26</version>
-            <type>pom</type>
-        </dependency>
-        <dependency>
             <groupId>dev.jorel</groupId>
             <artifactId>commandapi-bukkit-core</artifactId>
             <version>9.3.0</version>
@@ -110,6 +108,18 @@
             <artifactId>commandapi-annotations</artifactId>
             <version>9.3.0</version>
             <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.palmergames.bukkit.towny</groupId>
+            <artifactId>towny</artifactId>
+            <version>0.100.1.0</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>xyz.xenondevs.invui</groupId>
+            <artifactId>invui</artifactId>
+            <version>1.27</version>
+            <type>pom</type>
         </dependency>
     </dependencies>
 </project>

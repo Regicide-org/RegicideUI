@@ -1,8 +1,8 @@
 package org.regicide.regicideui;
 
-import dev.jorel.commandapi.CommandAPI;
 import dev.jorel.commandapi.CommandAPIBukkit;
 import net.milkbowl.vault.economy.Economy;
+import org.bukkit.Bukkit;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
@@ -11,7 +11,6 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.regicide.regicideui.commands.*;
 import org.regicide.regicideui.listeners.PlayerListener;
-import org.regicide.regicideui.utils.CustomConfiguration;
 
 import java.io.File;
 import java.io.IOException;
@@ -22,9 +21,7 @@ import java.io.IOException;
 public final class RegicideUI extends JavaPlugin {
 
     private static Economy econ = null;
-
     private static RegicideUI instance;
-    private static CustomConfiguration localization;
     private static Config config;
 
     @Override
@@ -36,19 +33,20 @@ public final class RegicideUI extends JavaPlugin {
      * Plugin startup logic.
      */
     @Override
+    @SuppressWarnings("UnstableApiUsage")
     public void onEnable() {
         instance = this;
         //RegicideUIPlayerManager.loadAllPlayers();
 
+        Bukkit.getLogger().info("=====================     RegicideUI     =====================");
         // Config
-        getLogger().info("");
         if (!configLoad()) {
             this.getServer().getPluginManager().disablePlugin(this);
             return;
         }
         getLogger().info("Configuration was successfully loaded!");
 
-        getLogger().info("");
+        // Vault
         if (getConfig().getBoolean("vault")) {
             Plugin vault = getServer().getPluginManager().getPlugin("Vault");
             if (vault != null) {
@@ -61,18 +59,22 @@ public final class RegicideUI extends JavaPlugin {
             }
         }
 
-        // TODO: переписать этот позор, используя Internalization (https://docs.papermc.io/velocity/dev/component-api/i18n)
-        String localizationName = getConfig().getString("localization");
-        localization = new CustomConfiguration("localization" + File.separator + localizationName + ".yml");
-        getLogger().info(localizationName + " was successfully loaded!");
+        // Localization
+        try {
+            Localization.setup(this, config.isClientBased(), "settings" + File.separator + "localization", "reference", config.getDefaultLocalization());
+        } catch (IOException | InvalidConfigurationException e) {
+            throw new RuntimeException(e);
+        }
+        getLogger().info("Localization was successfully loaded!");
 
-        getLogger().info("");
         listenersLoad();
         getLogger().info("All listeners successfully loaded!");
 
-        getLogger().info("");
         commandsLoad();
         getLogger().info("All commands successfully loaded!");
+        Bukkit.getLogger().info("==============================================================");
+        getLogger().info("Version: "+ getPluginMeta().getVersion() + " – Plugin Enabled");
+        Bukkit.getLogger().info("==============================================================");
     }
 
     /**
@@ -81,7 +83,11 @@ public final class RegicideUI extends JavaPlugin {
     public void reload() {
         //RegicideUIPlayerManager.loadAllPlayers();
         this.reloadConfig();
-        localization = new CustomConfiguration("localization" + File.separator + getConfig().getString("localization") + ".yml");
+        try {
+            Localization.setup(this, config.isClientBased(), "settings" + File.separator + "localization", "reference", config.getDefaultLocalization());
+        } catch (IOException | InvalidConfigurationException e) {
+            e.printStackTrace();
+        }
         getLogger().info("Plugin was successfully reload!");
     }
 
@@ -110,12 +116,12 @@ public final class RegicideUI extends JavaPlugin {
     }
 
     private void commandsLoad() {
-        CommandAPI.registerCommand(RegicideuiCMD.class);
-        CommandAPI.registerCommand(MenuCMD.class);
-        CommandAPI.registerCommand(MapCMD.class);
-        CommandAPI.registerCommand(HrefsCMD.class);
-        CommandAPI.registerCommand(DiscordCMD.class);
-        CommandAPI.registerCommand(VkCMD.class);
+        RegicideuiCMD.register();
+        MenuCMD.register();
+        MapCMD.register();
+        HrefsCMD.register();
+        DiscordCMD.register();
+        VkCMD.register();
         ProfileCMD.register();
 
         if (config().isUseCustomHelp()) {
@@ -153,11 +159,6 @@ public final class RegicideUI extends JavaPlugin {
     public static RegicideUI instance() {
         return instance;
     }
-
-    /**
-     * @return The localization of the {@link RegicideUI}.
-     */
-    public static CustomConfiguration l() { return localization; }
 
     /**
      * @return The configuration of the {@link RegicideUI}.

@@ -1,43 +1,36 @@
 package org.regicide.regicideui.commands;
 
-import dev.jorel.commandapi.annotations.Command;
-import dev.jorel.commandapi.annotations.Default;
-import dev.jorel.commandapi.annotations.Permission;
+import dev.jorel.commandapi.CommandAPICommand;
 import net.kyori.adventure.sound.Sound;
 import org.bukkit.NamespacedKey;
-import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.jetbrains.annotations.NotNull;
+import org.regicide.regicideui.Localization;
 import org.regicide.regicideui.RegicideUI;
-import org.regicide.regicideui.ui.hrefs.HrefsGUI;
+import org.regicide.regicideui.objects.ui.hrefs.Hrefs;
 import xyz.xenondevs.invui.window.Window;
 
-@Command("hrefs")
 public final class HrefsCMD {
-    @SuppressWarnings("ConstantConditions")
-    @Default
-    @Permission("regicideui.command.hrefs")
-    public static void hrefs(@NotNull final CommandSender sender) {
-        if (!(sender instanceof Player)) {
-            sender.sendMessage("Only for players!");
-            return;
-        }
+    public static void register() {
+        new CommandAPICommand("hrefs")
+                .withPermission("regicideui.command.hrefs")
+                .executesPlayer(executor -> {
+                    Player pe = executor.sender();
 
-        Player p = (Player) sender;
+                    Window window = Window.merged()
+                            .setViewer(pe)
+                            .setTitle(Localization.get("ui.element.hrefs.title", pe.locale().toString()))
+                            .setGui(new Hrefs(pe).getGui())
+                            .build();
+                    window.open();
 
-        Window window = Window.merged()
-                .setViewer(p)
-                .setTitle(RegicideUI.l().c().getString("hrefs-title"))
-                .setGui(new HrefsGUI(null).getGui())
-                .build();
-        window.open();
-
-        Sound s = Sound.sound(
-                new NamespacedKey(RegicideUI.config().getOpenMenuPathSpace(), RegicideUI.config().getOpenMenuPathName()),
-                Sound.Source.PLAYER,
-                RegicideUI.config().getOpenMenuVolume(),
-                RegicideUI.config().getOpenMenuPitch()
-        );
-        p.playSound(s);
+                    Sound s = Sound.sound(
+                            new NamespacedKey(RegicideUI.config().getOpenMenuPathSpace(), RegicideUI.config().getOpenMenuPathName()),
+                            Sound.Source.PLAYER,
+                            RegicideUI.config().getOpenMenuVolume(),
+                            RegicideUI.config().getOpenMenuPitch()
+                    );
+                    pe.playSound(s);
+                })
+                .register();
     }
 }

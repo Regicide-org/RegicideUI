@@ -1,10 +1,9 @@
 package org.regicide.regicideui.commands;
 
 import dev.jorel.commandapi.CommandAPICommand;
-import org.regicide.regicideui.RegicideUI;
-import org.regicide.regicideui.ui.pedia.help.HelpGUI;
+import org.regicide.regicideui.Localization;
+import org.regicide.regicideui.objects.ui.help.Help;
 import xyz.xenondevs.invui.window.Window;
-import xyz.xenondevs.invui.window.WindowManager;
 
 public final class HelpCMD {
 
@@ -16,13 +15,10 @@ public final class HelpCMD {
                 .executesPlayer((pExecutor, args) -> {
                     Window window = Window.merged()
                             .setViewer(pExecutor)
-                            .setGui(new HelpGUI(WindowManager.getInstance().getOpenWindow(pExecutor)).getGui())
-                            .setTitle(RegicideUI.l().c().getString("help-title"))
+                            .setGui(new Help(pExecutor).getGui())
+                            .setTitle(Localization.get("ui.element.wiki.title", pExecutor.locale().toString()))
                             .build();
                     window.open();
-                })
-                .executesConsole(sender -> {
-                    RegicideUI.instance().getLogger().info("Not implemented for a console!");
                 })
                 .register();
     }

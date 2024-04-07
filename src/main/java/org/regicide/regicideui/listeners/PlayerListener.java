@@ -1,16 +1,15 @@
 package org.regicide.regicideui.listeners;
 
-import org.bukkit.Sound;
+import net.kyori.adventure.sound.Sound;
+import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
-import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.event.player.PlayerQuitEvent;
 import org.jetbrains.annotations.NotNull;
+import org.regicide.regicideui.Localization;
 import org.regicide.regicideui.RegicideUI;
-import org.regicide.regicideui.ui.profile.ProfileGUI;
-import org.regicide.regicideui.utils.UtilManager;
+import org.regicide.regicideui.objects.ui.profile.Profile;
 import xyz.xenondevs.invui.window.Window;
 
 public final class PlayerListener implements Listener {
@@ -20,25 +19,19 @@ public final class PlayerListener implements Listener {
             return;
 
         Player p = e.getPlayer();
-        p.playSound(p, Sound.BLOCK_NOTE_BLOCK_BELL, 1, 8);
+        net.kyori.adventure.sound.Sound s = net.kyori.adventure.sound.Sound.sound(
+                new NamespacedKey(RegicideUI.config().getExitButtonPathSpace(), RegicideUI.config().getOpenMenuPathSpace()),
+                Sound.Source.PLAYER,
+                RegicideUI.config().getExitButtonVolume(),
+                RegicideUI.config().getExitButtonPitch()
+        );
+        p.playSound(s);
 
         Window window = Window.merged()
                 .setViewer(e.getPlayer())
-                .setTitle(RegicideUI.l().c().getString("profile-title"))
-                .setGui(new ProfileGUI(null, p, (Player) e.getRightClicked()).getGui())
+                .setTitle(Localization.get("ui.element.profile.title", p.locale().toString()))
+                .setGui(new Profile(p).getGui())
                 .build();
         window.open();
-    }
-
-    @EventHandler
-    public void onPlayerJoinServer(@NotNull final PlayerJoinEvent e) {
-        UtilManager.addPlayer(e.getPlayer());
-        RegicideUI.instance().getLogger().info(UtilManager.getOnlinePlayerNames().toString());
-    }
-
-    @EventHandler
-    private void onPlayerLeaveServer(@NotNull final PlayerQuitEvent e) {
-        UtilManager.removePlayer(e.getPlayer());
-        RegicideUI.instance().getLogger().info(UtilManager.getOnlinePlayerNames().toString());
     }
 }

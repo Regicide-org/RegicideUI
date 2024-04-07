@@ -1,18 +1,17 @@
 package org.regicide.regicideui.commands;
 
-
 import dev.jorel.commandapi.CommandAPICommand;
 import dev.jorel.commandapi.arguments.StringArgument;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.OfflinePlayer;
+import org.regicide.regicideui.Localization;
 import org.regicide.regicideui.RegicideUI;
-import org.regicide.regicideui.ui.profile.ProfileGUI;
+import org.regicide.regicideui.objects.ui.profile.Profile;
 import xyz.xenondevs.invui.window.Window;
 
 public final class ProfileCMD {
 
-    @SuppressWarnings("ConstantConditions")
     public static void register() {
 
         // TODO Вывод онлайн-игроков
@@ -27,8 +26,16 @@ public final class ProfileCMD {
                     if (name != null) {
                         OfflinePlayer pTarget = RegicideUI.instance().getServer().getOfflinePlayerIfCached(name);
 
+                        if (!(pExecutor.hasPermission("regicideui.command.profile.other"))) {
+
+                            String msgText = Localization.get("message.error.don't_have_permission.to_perform_command", pExecutor.locale().toString());
+                            Component msg = MiniMessage.miniMessage().deserialize("<i:false><white>"+msgText+"</white></i>");
+                            pExecutor.sendMessage(msg);
+                            return;
+                        }
+
                         if (pTarget == null) {
-                            String msgText = RegicideUI.l().c().getString("message-player-never-logged-error");
+                            String msgText = Localization.get("message.error.player_never_logged_on_this_server", pExecutor.locale().toString());
                             Component msg = MiniMessage.miniMessage().deserialize("<i:false><white>"+msgText+"</white></i>");
                             pExecutor.sendMessage(msg);
 
@@ -37,26 +44,17 @@ public final class ProfileCMD {
 
                         Window window = Window.merged()
                                 .setViewer(pExecutor)
-                                .setTitle(RegicideUI.l().c().getString("profile-title"))
-                                .setGui(new ProfileGUI(null, pExecutor, pExecutor).getGui())
+                                .setTitle(Localization.get("ui.element.profile.title", pExecutor.locale().toString()))
+                                .setGui(new Profile(pExecutor).getGui())
                                 .build();
                         window.open();
 
-                        // Self profile
                     } else {
-
-                        if (!(pExecutor.hasPermission("regicideui.command.profile.other"))) {
-
-                            String msgText = RegicideUI.l().c().getString("message-don't-have-permission-to-perform-command");
-                            Component msg = MiniMessage.miniMessage().deserialize("<i:false><white>"+msgText+"</white></i>");
-                            pExecutor.sendMessage(msg);
-                            return;
-                        }
 
                         Window window = Window.merged()
                                 .setViewer(pExecutor)
-                                .setTitle(RegicideUI.l().c().getString("profile-title"))
-                                .setGui(new ProfileGUI(null, pExecutor, pExecutor).getGui())
+                                .setTitle(Localization.get("ui.element.profile.title", pExecutor.locale().toString()))
+                                .setGui(new Profile(pExecutor).getGui())
                                 .build();
                         window.open();
                     }
