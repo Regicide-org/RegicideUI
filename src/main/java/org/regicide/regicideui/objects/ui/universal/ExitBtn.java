@@ -18,8 +18,8 @@ public class ExitBtn extends DefaultElementGUI {
 
     private final ContainerGUI container;
 
-    public ExitBtn(@NotNull final ContainerGUI container) {
-        super(container, "ui.element.universal.button.exit.name", "ui.element.universal.button.exit.lore", 101);
+    public ExitBtn(@NotNull final ContainerGUI container, int cmd) {
+        super(container, "ui.element.universal.button.exit.name", "ui.element.universal.button.exit.lore", cmd);
         this.container = container;
     }
 

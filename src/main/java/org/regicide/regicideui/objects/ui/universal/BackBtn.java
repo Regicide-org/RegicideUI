@@ -10,14 +10,11 @@ import org.regicide.regicideui.RegicideUI;
 import org.regicide.regicideui.objects.ui.ContainerGUI;
 import org.regicide.regicideui.objects.ui.DefaultElementGUI;
 import xyz.xenondevs.invui.window.Window;
-import xyz.xenondevs.invui.window.WindowManager;
-
-import java.util.Objects;
 
 public class BackBtn extends DefaultElementGUI {
     private final Window prevWindow;
-    public BackBtn(@NotNull final Window prevWindow, @NotNull final ContainerGUI container) {
-        super(container, "ui.element.universal.button.back.name", "ui.element.universal.button.back.lore", 98);
+    public BackBtn(@NotNull final Window prevWindow, @NotNull final ContainerGUI container, int cmd) {
+        super(container, "ui.element.universal.button.back.name", "ui.element.universal.button.back.lore", cmd);
         this.container = container;
         this.prevWindow = prevWindow;
     }

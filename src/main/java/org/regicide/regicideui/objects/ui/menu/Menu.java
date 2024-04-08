@@ -4,6 +4,7 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import org.regicide.regicideui.objects.ui.ContainerGUI;
 import org.regicide.regicideui.objects.ui.universal.ExitBtn;
+import org.regicide.regicideui.objects.ui.universal.InfoBtn;
 import xyz.xenondevs.invui.gui.Gui;
 
 public class Menu extends ContainerGUI {
@@ -25,8 +26,8 @@ public class Menu extends ContainerGUI {
                         ". . . . . . . . .",
                         ". . . . . . . . .",
                         ". . . . . . . . .")
-                .addIngredient('x', new ExitBtn(this))
-                .addIngredient('i', new InfoBtn(this))
+                .addIngredient('x', new ExitBtn(this, 101))
+                .addIngredient('i', new InfoBtn(this,"ui.element.menu.button.info.lore", 102))
                 .addIngredient('a', new WebMapBtn(this))
                 .addIngredient('s', new HrefsBtn(this))
                 .addIngredient('p', new ProfileBtn(this))

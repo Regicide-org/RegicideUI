@@ -5,6 +5,7 @@ import org.jetbrains.annotations.NotNull;
 import org.regicide.regicideui.objects.ui.ContainerGUI;
 import org.regicide.regicideui.objects.ui.universal.BackBtn;
 import org.regicide.regicideui.objects.ui.universal.ExitBtn;
+import org.regicide.regicideui.objects.ui.universal.InfoBtn;
 import xyz.xenondevs.invui.gui.Gui;
 import xyz.xenondevs.invui.item.impl.AbstractItem;
 import xyz.xenondevs.invui.window.Window;
@@ -24,8 +25,8 @@ public class Hrefs extends ContainerGUI {
 
         AbstractItem exitBackBtn;
         if (this.hasPrevWindow())
-            exitBackBtn = new BackBtn(this.prevWindow, this);
-        else exitBackBtn = new ExitBtn(this);
+            exitBackBtn = new BackBtn(this.prevWindow, this, 98);
+        else exitBackBtn = new ExitBtn(this, 101);
 
         this.gui = Gui.normal()
                 .setStructure(
@@ -35,7 +36,7 @@ public class Hrefs extends ContainerGUI {
                         ". . . . . . . . .",
                         ". . . . . . . . .")
                 .addIngredient('x', exitBackBtn)
-                .addIngredient('i', new InfoBtn(this))
+                .addIngredient('i', new InfoBtn(this, "ui.element.hrefs.button.info.lore", 99))
                 .addIngredient('v', new VkontakteBtn(this))
                 .addIngredient('d', new DiscordBtn(this))
                 .build();
