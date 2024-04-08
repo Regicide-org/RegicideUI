@@ -7,6 +7,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.jetbrains.annotations.NotNull;
+import org.regicide.regicideui.Config;
 import org.regicide.regicideui.Localization;
 import org.regicide.regicideui.RegicideUI;
 import org.regicide.regicideui.objects.ui.profile.Profile;
@@ -20,10 +21,10 @@ public final class PlayerListener implements Listener {
 
         Player p = e.getPlayer();
         net.kyori.adventure.sound.Sound s = net.kyori.adventure.sound.Sound.sound(
-                new NamespacedKey(RegicideUI.config().getExitButtonPathSpace(), RegicideUI.config().getOpenMenuPathSpace()),
+                new NamespacedKey(Config.getExitButtonPathSpace(), Config.getOpenMenuPathSpace()),
                 Sound.Source.PLAYER,
-                RegicideUI.config().getExitButtonVolume(),
-                RegicideUI.config().getExitButtonPitch()
+                Config.getExitButtonVolume(),
+                Config.getExitButtonPitch()
         );
         p.playSound(s);
 

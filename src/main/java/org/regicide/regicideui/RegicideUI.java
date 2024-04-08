@@ -22,7 +22,6 @@ public final class RegicideUI extends JavaPlugin {
 
     private static Economy econ = null;
     private static RegicideUI instance;
-    private static Config config;
 
     @Override
     public void onLoad() {
@@ -61,7 +60,7 @@ public final class RegicideUI extends JavaPlugin {
 
         // Localization
         try {
-            Localization.setup(this, config.isClientBased(), "settings" + File.separator + "localization", "reference", config.getDefaultLocalization());
+            Localization.setup(this, Config.isClientBased(), "settings" + File.separator + "localization", "reference", Config.getDefaultLocalization());
         } catch (IOException | InvalidConfigurationException e) {
             throw new RuntimeException(e);
         }
@@ -84,7 +83,7 @@ public final class RegicideUI extends JavaPlugin {
         //RegicideUIPlayerManager.loadAllPlayers();
         this.reloadConfig();
         try {
-            Localization.setup(this, config.isClientBased(), "settings" + File.separator + "localization", "reference", config.getDefaultLocalization());
+            Localization.setup(this, Config.isClientBased(), "settings" + File.separator + "localization", "reference", Config.getDefaultLocalization());
         } catch (IOException | InvalidConfigurationException e) {
             e.printStackTrace();
         }
@@ -100,7 +99,7 @@ public final class RegicideUI extends JavaPlugin {
 
     private boolean configLoad() {
         try {
-            config = new Config();
+            Config.setup();
         } catch (IOException | InvalidConfigurationException e) {
             getLogger().severe("Critical error when creating the configuration file! Details below:");
             e.printStackTrace();
@@ -124,7 +123,7 @@ public final class RegicideUI extends JavaPlugin {
         VkCMD.register();
         ProfileCMD.register();
 
-        if (config().isUseCustomHelp()) {
+        if (Config.isUseCustomHelp()) {
             // TODO доделать
             new BukkitRunnable() {
                 @Override
@@ -158,12 +157,5 @@ public final class RegicideUI extends JavaPlugin {
      */
     public static RegicideUI instance() {
         return instance;
-    }
-
-    /**
-     * @return The configuration of the {@link RegicideUI}.
-     */
-    public static Config config() {
-        return config;
     }
 }

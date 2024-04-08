@@ -4,8 +4,8 @@ import dev.jorel.commandapi.CommandAPICommand;
 import net.kyori.adventure.sound.Sound;
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
+import org.regicide.regicideui.Config;
 import org.regicide.regicideui.Localization;
-import org.regicide.regicideui.RegicideUI;
 import org.regicide.regicideui.objects.ui.hrefs.Hrefs;
 import xyz.xenondevs.invui.window.Window;
 
@@ -24,10 +24,10 @@ public final class HrefsCMD {
                     window.open();
 
                     Sound s = Sound.sound(
-                            new NamespacedKey(RegicideUI.config().getOpenMenuPathSpace(), RegicideUI.config().getOpenMenuPathName()),
+                            new NamespacedKey(Config.getOpenMenuPathSpace(), Config.getOpenMenuPathName()),
                             Sound.Source.PLAYER,
-                            RegicideUI.config().getOpenMenuVolume(),
-                            RegicideUI.config().getOpenMenuPitch()
+                            Config.getOpenMenuVolume(),
+                            Config.getOpenMenuPitch()
                     );
                     pe.playSound(s);
                 })

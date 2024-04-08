@@ -4,8 +4,8 @@ import dev.jorel.commandapi.CommandAPICommand;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.regicide.regicideui.Config;
 import org.regicide.regicideui.Localization;
-import org.regicide.regicideui.RegicideUI;
 
 import java.text.MessageFormat;
 
@@ -17,7 +17,7 @@ public final class DiscordCMD {
                 .executes(executor -> {
                     CommandSender sender = executor.sender();
 
-                    String dsLink = RegicideUI.config().getDiscordLink();
+                    String dsLink = Config.getDiscordLink();
 
                     if (!(sender instanceof Player)) {
                         sender.sendMessage("Discord group: " + dsLink);

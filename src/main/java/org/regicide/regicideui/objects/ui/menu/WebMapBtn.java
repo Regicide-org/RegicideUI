@@ -6,7 +6,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.jetbrains.annotations.NotNull;
-import org.regicide.regicideui.RegicideUI;
+import org.regicide.regicideui.Config;
 import org.regicide.regicideui.objects.ui.ContainerGUI;
 import org.regicide.regicideui.objects.ui.DefaultElementGUI;
 import xyz.xenondevs.invui.window.WindowManager;
@@ -25,10 +25,10 @@ public class WebMapBtn extends DefaultElementGUI {
         if (clickType.isLeftClick()) {
 
             net.kyori.adventure.sound.Sound s = net.kyori.adventure.sound.Sound.sound(
-                    new NamespacedKey(RegicideUI.config().getOpenMenuPathSpace(), RegicideUI.config().getOpenMenuPathName()),
+                    new NamespacedKey(Config.getOpenMenuPathSpace(), Config.getOpenMenuPathName()),
                     Sound.Source.PLAYER,
-                    RegicideUI.config().getOpenMenuVolume(),
-                    RegicideUI.config().getOpenMenuPitch()
+                    Config.getOpenMenuVolume(),
+                    Config.getOpenMenuPitch()
             );
             player.playSound(s);
             Objects.requireNonNull(

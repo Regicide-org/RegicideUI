@@ -6,7 +6,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.jetbrains.annotations.NotNull;
-import org.regicide.regicideui.RegicideUI;
+import org.regicide.regicideui.Config;
 import org.regicide.regicideui.objects.ui.ContainerGUI;
 import org.regicide.regicideui.objects.ui.DefaultElementGUI;
 import xyz.xenondevs.invui.window.WindowManager;
@@ -27,10 +27,10 @@ public class MarketBtn extends DefaultElementGUI {
         if (clickType.isLeftClick()) {
 
             Sound s = Sound.sound(
-                    new NamespacedKey(RegicideUI.config().getExitButtonPathSpace(), RegicideUI.config().getExitButtonPathName()),
+                    new NamespacedKey(Config.getExitButtonPathSpace(), Config.getExitButtonPathName()),
                     Sound.Source.PLAYER,
-                    RegicideUI.config().getExitButtonVolume(),
-                    RegicideUI.config().getExitButtonPitch()
+                    Config.getExitButtonVolume(),
+                    Config.getExitButtonPitch()
             );
             player.playSound(s);
 

@@ -4,6 +4,7 @@ import dev.jorel.commandapi.CommandAPICommand;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.regicide.regicideui.Config;
 import org.regicide.regicideui.Localization;
 import org.regicide.regicideui.RegicideUI;
 
@@ -17,7 +18,7 @@ public final class VkCMD {
                 .executes(executor -> {
                     CommandSender sender = executor.sender();
 
-                    String mapLink = RegicideUI.config().getVkLink();
+                    String mapLink = Config.getVkLink();
 
                     if (!(sender instanceof Player)) {
                         sender.sendMessage("VK group: " + mapLink);
