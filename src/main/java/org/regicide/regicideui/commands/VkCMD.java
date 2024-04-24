@@ -6,8 +6,6 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.regicide.regicideui.Config;
 import org.regicide.regicideui.Localization;
-import org.regicide.regicideui.RegicideUI;
-
 import java.text.MessageFormat;
 
 public final class VkCMD {

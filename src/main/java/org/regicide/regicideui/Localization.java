@@ -114,7 +114,6 @@ public final class Localization {
         if (dir.listFiles() == null || dir.listFiles().length == 0)
             return;
 
-        plugin.getLogger().info("");
         plugin.getLogger().info("Override localizations detected:");
         for (File bundleFile : dir.listFiles()) {
             LocalizationBundle locBundle = new LocalizationBundle(bundleFile);

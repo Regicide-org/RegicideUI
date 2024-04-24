@@ -9,11 +9,10 @@ import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.jetbrains.annotations.NotNull;
 import org.regicide.regicideui.Config;
 import org.regicide.regicideui.Localization;
-import org.regicide.regicideui.RegicideUI;
 import org.regicide.regicideui.objects.ui.profile.Profile;
 import xyz.xenondevs.invui.window.Window;
 
-public final class PlayerListener implements Listener {
+public final class ClickOnPlayerSeeProfileListener implements Listener {
     @EventHandler
     public void onPlayerClickOnAnotherPlayer(@NotNull final PlayerInteractEntityEvent e) {
         if (!(e.getRightClicked() instanceof Player))

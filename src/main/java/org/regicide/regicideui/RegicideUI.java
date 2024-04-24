@@ -1,5 +1,6 @@
 package org.regicide.regicideui;
 
+import de.maxhenkel.voicechat.api.BukkitVoicechatService;
 import dev.jorel.commandapi.CommandAPIBukkit;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
@@ -10,7 +11,8 @@ import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.regicide.regicideui.commands.*;
-import org.regicide.regicideui.listeners.PlayerListener;
+import org.regicide.regicideui.listeners.ClickOnPlayerSeeProfileListener;
+import org.regicide.regicideui.util.RegicideVoiceChat;
 
 import java.io.File;
 import java.io.IOException;
@@ -19,14 +21,8 @@ import java.io.IOException;
  * Main plugin class.
  */
 public final class RegicideUI extends JavaPlugin {
-
     private static Economy econ = null;
     private static RegicideUI instance;
-
-    @Override
-    public void onLoad() {
-
-    }
 
     /**
      * Plugin startup logic.
@@ -45,18 +41,7 @@ public final class RegicideUI extends JavaPlugin {
         }
         getLogger().info("Configuration was successfully loaded!");
 
-        // Vault
-        if (getConfig().getBoolean("vault")) {
-            Plugin vault = getServer().getPluginManager().getPlugin("Vault");
-            if (vault != null) {
-                setupEconomy();
-                getLogger().info(vault.getPluginMeta().getName() + " – " + vault.getPluginMeta().getVersion() + " was successfully found!");
-            }
-            else {
-                getLogger().warning("Vault was not found! All plugin elements using Vault will be disabled!");
-                this.getConfig().set("Vault", Boolean.FALSE);
-            }
-        }
+        additionalLoad();
 
         // Localization
         try {
@@ -66,7 +51,7 @@ public final class RegicideUI extends JavaPlugin {
         }
         getLogger().info("Localization was successfully loaded!");
 
-        listenersLoad();
+        defaultListenersLoad();
         getLogger().info("All listeners successfully loaded!");
 
         commandsLoad();
@@ -80,7 +65,6 @@ public final class RegicideUI extends JavaPlugin {
      * Reloads the plugin.
      */
     public void reload() {
-        //RegicideUIPlayerManager.loadAllPlayers();
         this.reloadConfig();
         try {
             Localization.setup(this, Config.isClientBased(), "settings" + File.separator + "localization", "reference", Config.getDefaultLocalization());
@@ -95,6 +79,9 @@ public final class RegicideUI extends JavaPlugin {
      */
     @Override
     public void onDisable() {
+        /*if (vcr != null) {
+            getServer().getServicesManager().unregister(vcr);
+        }*/
     }
 
     private boolean configLoad() {
@@ -109,9 +96,43 @@ public final class RegicideUI extends JavaPlugin {
         return true;
     }
 
-    private void listenersLoad() {
+    @SuppressWarnings({"UnstableApiUsage", "ConstantConditions"})
+    private void additionalLoad() {
+        // Vault
+        Plugin vault = getServer().getPluginManager().getPlugin("Vault");
+        if (vault != null) {
+            setupEconomy();
+            getLogger().info(vault.getPluginMeta().getName() + " – " + vault.getPluginMeta().getVersion() + " was successfully found!");
+        } else {
+            getLogger().warning("Vault was not found! All plugin elements using Vault will be disabled!");
+        }
+
+        // Protocol
+        /*Plugin protocolLib = getServer().getPluginManager().getPlugin("ProtocolLib");
+        if (protocolLib != null) {
+
+            getLogger().info(protocolLib.getPluginMeta().getName() + " – " + protocolLib.getPluginMeta().getVersion() + " was successfully found!");
+        }
+        else {
+            getLogger().warning("ProtocolLib was not found! All plugin elements using Vault will be disabled!");
+        }*/
+
+        // SimpleVoiceChat
+        Plugin svc = getServer().getPluginManager().getPlugin("voicechat");
+        if (svc != null) {
+            BukkitVoicechatService service = getServer().getServicesManager().load(BukkitVoicechatService.class);
+            service.registerPlugin(new RegicideVoiceChat());
+            getLogger().info(svc.getPluginMeta().getName() + " – " + vault.getPluginMeta().getVersion() + " was successfully found!");
+        }
+        else {
+            getLogger().warning("SimpleVoiceChat was not found! All plugin elements using Vault will be disabled!");
+        }
+
+    }
+
+    private void defaultListenersLoad() {
         PluginManager pm = getServer().getPluginManager();
-        pm.registerEvents(new PlayerListener(), this);
+        pm.registerEvents(new ClickOnPlayerSeeProfileListener(), this);
     }
 
     private void commandsLoad() {
@@ -124,18 +145,19 @@ public final class RegicideUI extends JavaPlugin {
         ProfileCMD.register();
 
         if (Config.isUseCustomHelp()) {
-            // TODO доделать
             new BukkitRunnable() {
                 @Override
                 public void run() {
                     CommandAPIBukkit.unregister("help", false, true);
+                    HelpCMD.register();
                 }
             }.runTaskLater(this, 0);
-
-            HelpCMD.register();
         }
     }
 
+    /**
+     * Setups vault economy.
+     */
     private void setupEconomy() {
         if (getServer().getPluginManager().getPlugin("Vault") == null) {
             return;
@@ -147,6 +169,9 @@ public final class RegicideUI extends JavaPlugin {
         econ = rsp.getProvider();
     }
 
+    /**
+     * @return The vault economy.
+     */
     @SuppressWarnings("unused")
     public static Economy getEconomy() {
         return econ;
@@ -158,4 +183,5 @@ public final class RegicideUI extends JavaPlugin {
     public static RegicideUI instance() {
         return instance;
     }
+
 }

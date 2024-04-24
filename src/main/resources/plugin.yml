@@ -3,4 +3,5 @@ version: '${project.version}'
 main: org.regicide.regicideui.RegicideUI
 api-version: '1.20'
 author: Theorenter
-softdepend: [ Vault, CommandAPI, Towny ]
+depend: [ CommandAPI, PlaceholderAPI ]
+softdepend: [ Vault, Towny, SimpleVoiceChat ]

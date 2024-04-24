@@ -76,3 +76,26 @@ GUI:
       - "essentials:help"
       - "bukkit:help"
       - "minecraft:help"
+
+  # SimpleVoiceChat interactions
+  voice-chat:
+    # Will the plugin interact with the SimpleVoiceChat plugin?
+    voice-chat: true
+
+    # Plugin installation notification settings.
+    # Shown to the client if he does not have the mod installed.
+    #
+    # The message content is edited in localization files.
+    # Localization key is message.notification.voicechat_not_installed
+    installation-notification:
+      # Cooldown between notifications.
+      timer: 60
+      # Will notifications play sounds.
+      use-sound: true
+      sound:
+        path:
+          space: "minecraft"
+          name: "block.note_block.pling"
+        pitch: 0.5
+        volume: 1.0
+

@@ -35,6 +35,15 @@ public final class Config {
     private static boolean useCustomHelp;
     private static List<String> helpUnregistered;
 
+    private static boolean vcUse;
+
+    private static int vcnTimer;
+    private static boolean vcnSoundUse;
+    private static String vcnPathSpace;
+    private static String vcnPathName;
+    private static float vcnPitch;
+    private static float vcnVolume;
+
     public static void setup() throws IOException, InvalidConfigurationException {
         File file;
         FileConfiguration fileConfig;
@@ -73,6 +82,15 @@ public final class Config {
 
         useCustomHelp = fileConfig.getBoolean("GUI.help.use-custom-help");
         helpUnregistered = fileConfig.getStringList("GUI.help.unregister-help");
+
+        vcUse = fileConfig.getBoolean("voice-chat.voice-chat");
+
+        vcnSoundUse = fileConfig.getBoolean("voice-chat.installation-notification.use-sound");
+        vcnTimer = fileConfig.getInt("voice-chat.installation-notification.timer");
+        vcnPathSpace = fileConfig.getString("voice-chat.installation-notification.sound.path.space");
+        vcnPathName = fileConfig.getString("voice-chat.installation-notification.sound.path.name");
+        vcnPitch = (float) fileConfig.getDouble("voice-chat.installation-notification.pitch");
+        vcnVolume = (float) fileConfig.getDouble("voice-chat.installation-notification.volume");
     }
 
     public static String getDefaultLocalization() {
@@ -146,8 +164,34 @@ public final class Config {
     public static boolean isUseCustomHelp() {
         return useCustomHelp;
     }
-
     public static List<String> getHelpUnregistered() {
         return helpUnregistered;
+    }
+    public static boolean isVcUse() {
+        return vcUse;
+    }
+
+    public static int getVcnTimer() {
+        return vcnTimer;
+    }
+
+    public static boolean isVcnSoundUse() {
+        return vcnSoundUse;
+    }
+
+    public static String getVcnPathSpace() {
+        return vcnPathSpace;
+    }
+
+    public static String getVcnPathName() {
+        return vcnPathName;
+    }
+
+    public static float getVcnPitch() {
+        return vcnPitch;
+    }
+
+    public static float getVcnVolume() {
+        return vcnVolume;
     }
 }
