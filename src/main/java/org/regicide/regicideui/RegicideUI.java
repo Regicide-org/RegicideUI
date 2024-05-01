@@ -12,6 +12,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.regicide.regicideui.commands.*;
 import org.regicide.regicideui.listeners.ClickOnPlayerSeeProfileListener;
+import org.regicide.regicideui.listeners.ClientJoinListener;
+import org.regicide.regicideui.objects.PlayerNameStorage;
 import org.regicide.regicideui.util.RegicideVoiceChat;
 
 import java.io.File;
@@ -65,12 +67,22 @@ public final class RegicideUI extends JavaPlugin {
      * Reloads the plugin.
      */
     public void reload() {
+        // Config
         this.reloadConfig();
+
+        // Localization
         try {
             Localization.setup(this, Config.isClientBased(), "settings" + File.separator + "localization", "reference", Config.getDefaultLocalization());
         } catch (IOException | InvalidConfigurationException e) {
             e.printStackTrace();
         }
+
+        // Player names storage
+        PlayerNameStorage.clear();
+        Bukkit.getOnlinePlayers().forEach(player ->
+            PlayerNameStorage.add(player.getName())
+        );
+
         getLogger().info("Plugin was successfully reload!");
     }
 
@@ -132,7 +144,9 @@ public final class RegicideUI extends JavaPlugin {
 
     private void defaultListenersLoad() {
         PluginManager pm = getServer().getPluginManager();
+
         pm.registerEvents(new ClickOnPlayerSeeProfileListener(), this);
+        pm.registerEvents(new ClientJoinListener(), this);
     }
 
     private void commandsLoad() {

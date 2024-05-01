@@ -1,30 +1,40 @@
 package org.regicide.regicideui.commands;
 
 import dev.jorel.commandapi.CommandAPICommand;
+import dev.jorel.commandapi.arguments.Argument;
+import dev.jorel.commandapi.arguments.ArgumentSuggestions;
 import dev.jorel.commandapi.arguments.StringArgument;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.OfflinePlayer;
 import org.regicide.regicideui.Localization;
 import org.regicide.regicideui.RegicideUI;
+import org.regicide.regicideui.objects.PlayerNameStorage;
 import org.regicide.regicideui.objects.ui.profile.Profile;
 import xyz.xenondevs.invui.window.Window;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public final class ProfileCMD {
 
     public static void register() {
 
-        // TODO Вывод онлайн-игроков
+        List<Argument<?>> targetArgument = new ArrayList<>();
+        targetArgument.add(new StringArgument("target").includeSuggestions(ArgumentSuggestions.strings(
+                PlayerNameStorage.get()
+        )));
+
         new CommandAPICommand("profile")
-                .withOptionalArguments(new StringArgument("name"))
+                .withOptionalArguments(targetArgument)
                 .withPermission("regicideui.command.profile")
                 .executesPlayer((pExecutor, args) -> {
 
-                    String name = (String) args.get("name");
+                    String target = (String) args.get("target");
 
                     // Other profile
-                    if (name != null) {
-                        OfflinePlayer pTarget = RegicideUI.instance().getServer().getOfflinePlayerIfCached(name);
+                    if (target != null) {
+                        OfflinePlayer pTarget = RegicideUI.instance().getServer().getOfflinePlayerIfCached(target);
 
                         if (!(pExecutor.hasPermission("regicideui.command.profile.other"))) {
 
@@ -60,20 +70,20 @@ public final class ProfileCMD {
                     }
                 })
                 .executesConsole((sender, args) -> {
-                    String name = (String) args.get("name");
-                    if (name == null)
+                    String target = (String) args.get("target");
+                    if (target == null)
                         RegicideUI.instance().getLogger().info("The console has no profile!");
                     else
                         // TODO
                     {
-                        OfflinePlayer pTarget = RegicideUI.instance().getServer().getOfflinePlayerIfCached(name);
+                        OfflinePlayer pTarget = RegicideUI.instance().getServer().getOfflinePlayerIfCached(target);
 
                         if (pTarget == null) {
                             sender.sendMessage("This player has never logged on the server!");
                             return;
                         }
 
-                        RegicideUI.instance().getLogger().info("Вывод данных об игроке " + name);
+                        RegicideUI.instance().getLogger().info("Вывод данных об игроке " + target);
                     }
                 })
                 .register();
