@@ -22,10 +22,10 @@ public class DonateBtn extends DefaultElementGUI {
         if (clickType.isLeftClick()) {
 
             Sound s = Sound.sound(
-                    new NamespacedKey(Config.getExitButtonPathSpace(), Config.getExitButtonPathName()),
+                    new NamespacedKey(Config.instance().EXIT_BUTTON_PATH_SPACE, Config.instance().EXIT_BUTTON_PATH_NAME),
                     Sound.Source.PLAYER,
-                    Config.getExitButtonVolume(),
-                    Config.getExitButtonPitch()
+                    Config.instance().EXIT_BUTTON_VOLUME,
+                    Config.instance().EXIT_BUTTON_PITCH
             );
             player.playSound(s);
             player.sendMessage("");

@@ -16,7 +16,7 @@ public final class VkCMD {
                 .executes(executor -> {
                     CommandSender sender = executor.sender();
 
-                    String mapLink = Config.getVkLink();
+                    String mapLink = Config.instance().VK_LINK;
 
                     if (!(sender instanceof Player)) {
                         sender.sendMessage("VK group: " + mapLink);

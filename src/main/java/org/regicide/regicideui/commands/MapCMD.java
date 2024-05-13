@@ -17,7 +17,7 @@ public final class  MapCMD {
                 .executes(executor -> {
                     CommandSender sender = executor.sender();
 
-                    String mapLink = Config.getMapLink();
+                    String mapLink = Config.instance().MAP_LINK;
 
                     if (!(sender instanceof Player)) {
                         sender.sendMessage("WEB-Map URL: " + mapLink);

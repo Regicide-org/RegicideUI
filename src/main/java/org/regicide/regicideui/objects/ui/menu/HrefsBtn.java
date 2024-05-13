@@ -33,11 +33,11 @@ public class HrefsBtn extends DefaultElementGUI {
                     .build();
             window.open();
 
-            net.kyori.adventure.sound.Sound s = net.kyori.adventure.sound.Sound.sound(
-                    new NamespacedKey(Config.getOpenMenuPathSpace(), Config.getOpenMenuPathName()),
+            Sound s = Sound.sound(
+                    new NamespacedKey(Config.instance().OPEN_MENU_PATH_SPACE, Config.instance().OPEN_MENU_PATH_NAME),
                     Sound.Source.PLAYER,
-                    Config.getOpenMenuVolume(),
-                    Config.getOpenMenuPitch()
+                    Config.instance().OPEN_MENU_VOLUME,
+                    Config.instance().OPEN_MENU_PITCH
             );
             player.playSound(s);
         }

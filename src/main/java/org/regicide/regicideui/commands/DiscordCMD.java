@@ -17,7 +17,7 @@ public final class DiscordCMD {
                 .executes(executor -> {
                     CommandSender sender = executor.sender();
 
-                    String dsLink = Config.getDiscordLink();
+                    String dsLink = Config.instance().DISCORD_LINK;
 
                     if (!(sender instanceof Player)) {
                         sender.sendMessage("Discord group: " + dsLink);

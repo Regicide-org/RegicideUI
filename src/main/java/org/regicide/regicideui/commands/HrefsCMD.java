@@ -24,10 +24,10 @@ public final class HrefsCMD {
                     window.open();
 
                     Sound s = Sound.sound(
-                            new NamespacedKey(Config.getOpenMenuPathSpace(), Config.getOpenMenuPathName()),
+                            new NamespacedKey(Config.instance().OPEN_MENU_PATH_SPACE, Config.instance().OPEN_MENU_PATH_NAME),
                             Sound.Source.PLAYER,
-                            Config.getOpenMenuVolume(),
-                            Config.getOpenMenuPitch()
+                            Config.instance().OPEN_MENU_VOLUME,
+                            Config.instance().OPEN_MENU_PITCH
                     );
                     pe.playSound(s);
                 })

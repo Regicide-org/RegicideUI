@@ -28,10 +28,10 @@ public class ExitBtn extends DefaultElementGUI {
         if (clickType.isLeftClick()) {
 
             Sound s = Sound.sound(
-                    new NamespacedKey(Config.getExitButtonPathSpace(), Config.getExitButtonPathName()),
+                    new NamespacedKey(Config.instance().OPEN_MENU_PATH_SPACE, Config.instance().OPEN_MENU_PATH_NAME),
                     Sound.Source.PLAYER,
-                    Config.getExitButtonVolume(),
-                    Config.getExitButtonPitch()
+                    Config.instance().OPEN_MENU_VOLUME,
+                    Config.instance().OPEN_MENU_PITCH
             );
             player.playSound(s);
 

@@ -1,5 +1,6 @@
 package org.regicide.regicideui.objects.ui.hrefs;
 
+import net.kyori.adventure.sound.Sound;
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
@@ -27,11 +28,11 @@ public class DiscordBtn extends DefaultElementGUI {
             ).close();
             player.performCommand("discord");
 
-            net.kyori.adventure.sound.Sound s = net.kyori.adventure.sound.Sound.sound(
-                    new NamespacedKey(Config.getOpenMenuPathSpace(), Config.getOpenMenuPathName()),
-                    net.kyori.adventure.sound.Sound.Source.PLAYER,
-                    Config.getOpenMenuVolume(),
-                    Config.getOpenMenuPitch()
+            Sound s = Sound.sound(
+                    new NamespacedKey(Config.instance().OPEN_MENU_PATH_SPACE, Config.instance().OPEN_MENU_PATH_NAME),
+                    Sound.Source.PLAYER,
+                    Config.instance().OPEN_MENU_VOLUME,
+                    Config.instance().OPEN_MENU_PITCH
             );
             player.playSound(s);
         }

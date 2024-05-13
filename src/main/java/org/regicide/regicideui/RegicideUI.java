@@ -14,6 +14,7 @@ import org.regicide.regicideui.commands.*;
 import org.regicide.regicideui.listeners.ClickOnPlayerSeeProfileListener;
 import org.regicide.regicideui.listeners.ClientJoinListener;
 import org.regicide.regicideui.objects.PlayerNameStorage;
+import org.regicide.regicideui.objects.RegicideUIPlayer;
 import org.regicide.regicideui.util.RegicideVoiceChat;
 
 import java.io.File;
@@ -47,7 +48,7 @@ public final class RegicideUI extends JavaPlugin {
 
         // Localization
         try {
-            Localization.setup(this, Config.isClientBased(), "settings" + File.separator + "localization", "reference", Config.getDefaultLocalization());
+            Localization.setup(this, Config.instance().IS_CLIENT_BASED, "settings" + File.separator + "localization", "reference", Config.instance().DEFAULT_LOCALIZATION);
         } catch (IOException | InvalidConfigurationException e) {
             throw new RuntimeException(e);
         }
@@ -72,16 +73,18 @@ public final class RegicideUI extends JavaPlugin {
 
         // Localization
         try {
-            Localization.setup(this, Config.isClientBased(), "settings" + File.separator + "localization", "reference", Config.getDefaultLocalization());
+            Localization.setup(this, Config.instance().IS_CLIENT_BASED, "settings" + File.separator + "localization", "reference", Config.instance().DEFAULT_LOCALIZATION);
         } catch (IOException | InvalidConfigurationException e) {
             e.printStackTrace();
         }
 
         // Player names storage
         PlayerNameStorage.clear();
-        Bukkit.getOnlinePlayers().forEach(player ->
-            PlayerNameStorage.add(player.getName())
-        );
+        RegicideUIPlayer.unregisterAll();
+        Bukkit.getOnlinePlayers().forEach(player -> {
+                    PlayerNameStorage.add(player.getName());
+                    RegicideUIPlayer.registerPlayer(new RegicideUIPlayer(player));
+        });
 
         getLogger().info("Plugin was successfully reload!");
     }
@@ -98,7 +101,7 @@ public final class RegicideUI extends JavaPlugin {
 
     private boolean configLoad() {
         try {
-            Config.setup();
+            new Config();
         } catch (IOException | InvalidConfigurationException e) {
             getLogger().severe("Critical error when creating the configuration file! Details below:");
             e.printStackTrace();
@@ -158,7 +161,7 @@ public final class RegicideUI extends JavaPlugin {
         VkCMD.register();
         ProfileCMD.register();
 
-        if (Config.isUseCustomHelp()) {
+        if (Config.instance().USE_CUSTOM_HELP) {
             new BukkitRunnable() {
                 @Override
                 public void run() {

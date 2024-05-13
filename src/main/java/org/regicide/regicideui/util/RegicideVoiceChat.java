@@ -3,9 +3,9 @@ package org.regicide.regicideui.util;
 import de.maxhenkel.voicechat.api.VoicechatApi;
 import de.maxhenkel.voicechat.api.VoicechatPlugin;
 import de.maxhenkel.voicechat.api.events.*;
-import de.maxhenkel.voicechat.api.packets.Packet;
-import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 import org.regicide.regicideui.RegicideUI;
+import org.regicide.regicideui.objects.RegicideUIPlayer;
 
 public final class RegicideVoiceChat implements VoicechatPlugin {
 
@@ -33,11 +33,16 @@ public final class RegicideVoiceChat implements VoicechatPlugin {
      * @param registration the event registration
      */
     @Override
-    public void registerEvents(EventRegistration registration) {
-        registration.registerEvent(PlayerConnectedEvent.class, this::testEvent);
+    public void registerEvents(@NotNull final EventRegistration registration) {
+        registration.registerEvent(PlayerStateChangedEvent.class, this::playerStateChangeListener);
     }
 
-    public void testEvent(PlayerConnectedEvent event) {
-        System.out.println(event.getConnection().isConnected());
+    public void playerStateChangeListener(PlayerStateChangedEvent e) {
+        RegicideUIPlayer ruiPlayer = RegicideUIPlayer.getPlayer(e.getPlayerUuid());
+        if (ruiPlayer.isVcChecked())
+            return;
+
+        e.getConnection().isInstalled();
+        ruiPlayer.setVcChecked(true);
     }
 }

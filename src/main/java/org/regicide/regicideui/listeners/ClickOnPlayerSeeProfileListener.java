@@ -19,11 +19,11 @@ public final class ClickOnPlayerSeeProfileListener implements Listener {
             return;
 
         Player p = e.getPlayer();
-        net.kyori.adventure.sound.Sound s = net.kyori.adventure.sound.Sound.sound(
-                new NamespacedKey(Config.getExitButtonPathSpace(), Config.getOpenMenuPathSpace()),
+        Sound s = Sound.sound(
+                new NamespacedKey(Config.instance().EXIT_BUTTON_PATH_SPACE, Config.instance().EXIT_BUTTON_PATH_NAME),
                 Sound.Source.PLAYER,
-                Config.getExitButtonVolume(),
-                Config.getExitButtonPitch()
+                Config.instance().EXIT_BUTTON_VOLUME,
+                Config.instance().EXIT_BUTTON_PITCH
         );
         p.playSound(s);
 

@@ -12,39 +12,38 @@ import java.util.List;
  * Configuration of the {@link RegicideUI}.
  */
 public final class Config {
-    private static String defaultLocalization;
-    private static boolean isClientBased;
+    private static Config instance;
+    public final String DEFAULT_LOCALIZATION;
+    public final boolean IS_CLIENT_BASED;
+    public final String MAP_LINK;
+    public final String VK_LINK;
+    public final String DISCORD_LINK;
+    public final String EXIT_BUTTON_PATH_NAME;
+    public final String EXIT_BUTTON_PATH_SPACE;
+    public final float EXIT_BUTTON_PITCH;
+    public final float EXIT_BUTTON_VOLUME;
+    public final String BACK_BUTTON_PATH_NAME;
+    public final String BACK_BUTTON_PATH_SPACE;
+    public final float BACK_BUTTON_PITCH;
+    public final float BACK_BUTTON_VOLUME;
+    public final String OPEN_MENU_PATH_NAME;
+    public final String OPEN_MENU_PATH_SPACE;
+    public final float OPEN_MENU_PITCH;
+    public final float OPEN_MENU_VOLUME;
+    public final boolean USE_CUSTOM_HELP;
+    public final List<String> HELP_UNREGISTERED_COMMANDS;
+    public final boolean VC_USE;
+    public final int VC_NOTIFICATION_PERIOD;
+    public final int VC_NOTIFICATION_DELAY;
+    public final boolean VC_NOTIFICATION_SOUND_USE;
+    public final String VC_NOTIFICATION_PATH_SPACE;
+    public final String VC_NOTIFICATION_PATH_NAME;
+    public final float VC_NOTIFICATION_PITCH;
+    public final float VC_NOTIFICATION_VOLUME;
 
-    private static String mapLink;
-    private static String vkLink;
-    private static String discordLink;
+    public Config() throws IOException, InvalidConfigurationException {
+        instance = this;
 
-    private static String exitButtonPathName;
-    private static String exitButtonPathSpace;
-    private static float exitButtonPitch;
-    private static float exitButtonVolume;
-    private static String backButtonPathName;
-    private static String backButtonPathSpace;
-    private static float backButtonPitch;
-    private static float backButtonVolume;
-    private static String openMenuPathName;
-    private static String openMenuPathSpace;
-    private static float openMenuPitch;
-    private static float openMenuVolume;
-
-    private static boolean useCustomHelp;
-    private static List<String> helpUnregistered;
-
-    private static boolean vcUse;
-
-    private static int vcnTimer;
-    private static boolean vcnSoundUse;
-    private static String vcnPathSpace;
-    private static String vcnPathName;
-    private static float vcnPitch;
-    private static float vcnVolume;
-
-    public static void setup() throws IOException, InvalidConfigurationException {
         File file;
         FileConfiguration fileConfig;
 
@@ -58,140 +57,43 @@ public final class Config {
         fileConfig = new YamlConfiguration();
         fileConfig.load(file);
 
-        defaultLocalization = fileConfig.getString("language.default-localization");
-        isClientBased = fileConfig.getBoolean("language.client-based");
+        DEFAULT_LOCALIZATION = fileConfig.getString("language.default-localization");
+        IS_CLIENT_BASED = fileConfig.getBoolean("language.client-based");
 
-        mapLink = fileConfig.getString("GUI.links.map");
-        vkLink = fileConfig.getString("GUI.links.vk-group");
-        discordLink = fileConfig.getString("GUI.links.discord");
+        MAP_LINK = fileConfig.getString("GUI.links.map");
+        VK_LINK = fileConfig.getString("GUI.links.vk-group");
+        DISCORD_LINK = fileConfig.getString("GUI.links.discord");
 
-        exitButtonPathSpace = fileConfig.getString("GUI.sounds.exit-button.path.space");
-        exitButtonPathName = fileConfig.getString("GUI.sounds.exit-button.path.name");
-        exitButtonPitch = (float) fileConfig.getDouble("GUI.sounds.exit-button.pitch");
-        exitButtonVolume = (float) fileConfig.getDouble("GUI.sounds.exit-button.volume");
+        EXIT_BUTTON_PATH_SPACE = fileConfig.getString("GUI.sounds.exit-button.path.space");
+        EXIT_BUTTON_PATH_NAME = fileConfig.getString("GUI.sounds.exit-button.path.name");
+        EXIT_BUTTON_PITCH = (float) fileConfig.getDouble("GUI.sounds.exit-button.pitch");
+        EXIT_BUTTON_VOLUME = (float) fileConfig.getDouble("GUI.sounds.exit-button.volume");
 
-        backButtonPathSpace = fileConfig.getString("GUI.sounds.back-button.path.space");
-        backButtonPathName = fileConfig.getString("GUI.sounds.back-button.path.name");
-        backButtonPitch = (float) fileConfig.getDouble("GUI.sounds.back-button.pitch");
-        backButtonVolume = (float) fileConfig.getDouble("GUI.sounds.back-button.volume");
+        BACK_BUTTON_PATH_SPACE = fileConfig.getString("GUI.sounds.back-button.path.space");
+        BACK_BUTTON_PATH_NAME = fileConfig.getString("GUI.sounds.back-button.path.name");
+        BACK_BUTTON_PITCH = (float) fileConfig.getDouble("GUI.sounds.back-button.pitch");
+        BACK_BUTTON_VOLUME = (float) fileConfig.getDouble("GUI.sounds.back-button.volume");
 
-        openMenuPathSpace = fileConfig.getString("GUI.sounds.open-menu.path.space");
-        openMenuPathName = fileConfig.getString("GUI.sounds.open-menu.path.name");
-        openMenuPitch = (float) fileConfig.getDouble("GUI.sounds.open-menu.pitch");
-        openMenuVolume = (float) fileConfig.getDouble("GUI.sounds.open-menu.volume");
+        OPEN_MENU_PATH_SPACE = fileConfig.getString("GUI.sounds.open-menu.path.space");
+        OPEN_MENU_PATH_NAME = fileConfig.getString("GUI.sounds.open-menu.path.name");
+        OPEN_MENU_PITCH = (float) fileConfig.getDouble("GUI.sounds.open-menu.pitch");
+        OPEN_MENU_VOLUME = (float) fileConfig.getDouble("GUI.sounds.open-menu.volume");
 
-        useCustomHelp = fileConfig.getBoolean("GUI.help.use-custom-help");
-        helpUnregistered = fileConfig.getStringList("GUI.help.unregister-help");
+        USE_CUSTOM_HELP = fileConfig.getBoolean("GUI.help.use-custom-help");
+        HELP_UNREGISTERED_COMMANDS = fileConfig.getStringList("GUI.help.unregister-help");
 
-        vcUse = fileConfig.getBoolean("voice-chat.voice-chat");
+        VC_USE = fileConfig.getBoolean("voice-chat.voice-chat");
 
-        vcnSoundUse = fileConfig.getBoolean("voice-chat.installation-notification.use-sound");
-        vcnTimer = fileConfig.getInt("voice-chat.installation-notification.timer");
-        vcnPathSpace = fileConfig.getString("voice-chat.installation-notification.sound.path.space");
-        vcnPathName = fileConfig.getString("voice-chat.installation-notification.sound.path.name");
-        vcnPitch = (float) fileConfig.getDouble("voice-chat.installation-notification.pitch");
-        vcnVolume = (float) fileConfig.getDouble("voice-chat.installation-notification.volume");
+        VC_NOTIFICATION_SOUND_USE = fileConfig.getBoolean("voice-chat.installation-notification.use-sound");
+        VC_NOTIFICATION_PERIOD = fileConfig.getInt("voice-chat.installation-notification.period");
+        VC_NOTIFICATION_DELAY = fileConfig.getInt("voice-chat.installation-notification.delay");
+        VC_NOTIFICATION_PATH_SPACE = fileConfig.getString("voice-chat.installation-notification.sound.path.space");
+        VC_NOTIFICATION_PATH_NAME = fileConfig.getString("voice-chat.installation-notification.sound.path.name");
+        VC_NOTIFICATION_PITCH = (float) fileConfig.getDouble("voice-chat.installation-notification.pitch");
+        VC_NOTIFICATION_VOLUME = (float) fileConfig.getDouble("voice-chat.installation-notification.volume");
     }
 
-    public static String getDefaultLocalization() {
-        return defaultLocalization;
-    }
-
-    public static boolean isClientBased() {
-        return isClientBased;
-    }
-
-    public static String getMapLink() {
-        return mapLink;
-    }
-
-    public static String getVkLink() {
-        return vkLink;
-    }
-
-    public static String getDiscordLink() {
-        return discordLink;
-    }
-
-    public static String getExitButtonPathName() {
-        return exitButtonPathName;
-    }
-
-    public static String getExitButtonPathSpace() {
-        return exitButtonPathSpace;
-    }
-
-    public static float getExitButtonPitch() {
-        return exitButtonPitch;
-    }
-
-    public static float getExitButtonVolume() {
-        return exitButtonVolume;
-    }
-
-    public static String getBackButtonPathName() {
-        return backButtonPathName;
-    }
-
-    public static String getBackButtonPathSpace() {
-        return backButtonPathSpace;
-    }
-
-    public static float getBackButtonPitch() {
-        return backButtonPitch;
-    }
-
-    public static float getBackButtonVolume() {
-        return backButtonVolume;
-    }
-
-    public static String getOpenMenuPathName() {
-        return openMenuPathName;
-    }
-
-    public static String getOpenMenuPathSpace() {
-        return openMenuPathSpace;
-    }
-
-    public static float getOpenMenuPitch() {
-        return openMenuPitch;
-    }
-
-    public static float getOpenMenuVolume() {
-        return openMenuVolume;
-    }
-
-    public static boolean isUseCustomHelp() {
-        return useCustomHelp;
-    }
-    public static List<String> getHelpUnregistered() {
-        return helpUnregistered;
-    }
-    public static boolean isVcUse() {
-        return vcUse;
-    }
-
-    public static int getVcnTimer() {
-        return vcnTimer;
-    }
-
-    public static boolean isVcnSoundUse() {
-        return vcnSoundUse;
-    }
-
-    public static String getVcnPathSpace() {
-        return vcnPathSpace;
-    }
-
-    public static String getVcnPathName() {
-        return vcnPathName;
-    }
-
-    public static float getVcnPitch() {
-        return vcnPitch;
-    }
-
-    public static float getVcnVolume() {
-        return vcnVolume;
+    public static Config instance() {
+        return instance;
     }
 }

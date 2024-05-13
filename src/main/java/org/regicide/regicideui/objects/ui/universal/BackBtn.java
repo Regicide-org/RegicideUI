@@ -24,10 +24,10 @@ public class BackBtn extends DefaultElementGUI {
         if (clickType.isLeftClick()) {
 
             Sound s = Sound.sound(
-                    new NamespacedKey(Config.getExitButtonPathSpace(), Config.getExitButtonPathName()),
+                    new NamespacedKey(Config.instance().BACK_BUTTON_PATH_SPACE, Config.instance().BACK_BUTTON_PATH_NAME),
                     Sound.Source.PLAYER,
-                    Config.getExitButtonVolume(),
-                    Config.getExitButtonPitch()
+                    Config.instance().BACK_BUTTON_VOLUME,
+                    Config.instance().BACK_BUTTON_PITCH
             );
             prevWindow.open();
             player.playSound(s);
