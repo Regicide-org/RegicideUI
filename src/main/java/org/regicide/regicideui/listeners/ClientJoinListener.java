@@ -22,6 +22,11 @@ public class ClientJoinListener implements Listener {
     public void onPlayerQuit(@NotNull final PlayerQuitEvent e) {
         Player p = e.getPlayer();
         PlayerNameStorage.remove(p.getName());
+
+        RegicideUIPlayer ruiPlayer = RegicideUIPlayer.getPlayer(p);
+        if (!ruiPlayer.hasVCMod())
+            ruiPlayer.stopVoiceChatNotification();
+
         RegicideUIPlayer.unregisterPlayer(p.getUniqueId());
     }
 }

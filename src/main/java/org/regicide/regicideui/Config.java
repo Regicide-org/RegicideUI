@@ -33,6 +33,7 @@ public final class Config {
     public final boolean USE_CUSTOM_HELP;
     public final List<String> HELP_UNREGISTERED_COMMANDS;
     public final boolean VC_USE;
+    public final String VC_GUIDE_URL;
     public final int VC_NOTIFICATION_PERIOD;
 
     public final boolean VC_FIRST_MESSAGE_USE;
@@ -90,6 +91,8 @@ public final class Config {
         HELP_UNREGISTERED_COMMANDS = fileConfig.getStringList("GUI.help.unregister-help");
 
         VC_USE = fileConfig.getBoolean("voice-chat.using");
+
+        VC_GUIDE_URL = fileConfig.getString("voice-chat.guide-url");
 
         VC_FIRST_MESSAGE_USE = fileConfig.getBoolean("voice-chat.installation-first-message.use-message");
         VC_FIRST_MESSAGE_DELAY = fileConfig.getInt("voice-chat.installation-first-message.delay");

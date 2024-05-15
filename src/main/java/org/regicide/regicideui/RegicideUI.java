@@ -13,9 +13,10 @@ import org.bukkit.scheduler.BukkitRunnable;
 import org.regicide.regicideui.commands.*;
 import org.regicide.regicideui.listeners.ClickOnPlayerSeeProfileListener;
 import org.regicide.regicideui.listeners.ClientJoinListener;
-import org.regicide.regicideui.listeners.VoiceChatChecker;
+import org.regicide.regicideui.listeners.VoiceChatListener;
 import org.regicide.regicideui.objects.PlayerNameStorage;
 import org.regicide.regicideui.objects.RegicideUIPlayer;
+import org.regicide.regicideui.util.VoiceChatRegicide;
 
 import java.io.File;
 import java.io.IOException;
@@ -94,9 +95,6 @@ public final class RegicideUI extends JavaPlugin {
      */
     @Override
     public void onDisable() {
-        /*if (vcr != null) {
-            getServer().getServicesManager().unregister(vcr);
-        }*/
     }
 
     private boolean configLoad() {
@@ -136,7 +134,10 @@ public final class RegicideUI extends JavaPlugin {
         Plugin svc = getServer().getPluginManager().getPlugin("voicechat");
         if (svc != null) {
             getLogger().info(svc.getPluginMeta().getName() + " – " + vault.getPluginMeta().getVersion() + " was successfully found!");
-            getServer().getPluginManager().registerEvents(new VoiceChatChecker(), this);
+            BukkitVoicechatService service = getServer().getServicesManager().load(BukkitVoicechatService.class);
+            getServer().getPluginManager().registerEvents(new VoiceChatListener(), this);
+            service.registerPlugin(new VoiceChatRegicide());
+            VCSetupCMD.register();
         }
         else {
             getLogger().warning("SimpleVoiceChat was not found! All plugin elements using Vault will be disabled!");

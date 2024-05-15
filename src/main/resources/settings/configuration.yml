@@ -82,6 +82,9 @@ voice-chat:
   # Will the plugin interact with the SimpleVoiceChat plugin?
   using: true
 
+  # URL for the /vcinstall command.
+  guide-url: "https://vk.com/@concordiacraft-vcinstall"
+
   # The message content is edited in localization files.
   #
   # Localization key is message.notification.voicechat_not_installed.first_message

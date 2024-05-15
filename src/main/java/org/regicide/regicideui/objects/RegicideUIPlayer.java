@@ -1,7 +1,6 @@
 package org.regicide.regicideui.objects;
 
 import net.kyori.adventure.sound.Sound;
-import net.kyori.adventure.text.Component;
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -43,10 +42,12 @@ public class RegicideUIPlayer {
         return REGICIDE_UI_PLAYER_MAP.get(player.getUniqueId());
     }
 
-    private BukkitTask vcNotificationTask;
-
     private final Player base;
-    private boolean checkedVC;
+
+    private BukkitTask voiceNotifications = null;
+    private boolean voiceChatModStatus;
+
+    private boolean voiceChatCheckStatus = false;
 
     public RegicideUIPlayer(@NotNull final Player player) {
         this.base = player;
@@ -56,16 +57,24 @@ public class RegicideUIPlayer {
         return base;
     }
 
-    public boolean isVcChecked() {
-        return checkedVC;
+    public void setVCModStatus(boolean val) {
+        this.voiceChatModStatus = val;
     }
 
-    public void setVcChecked(boolean value) {
-        this.checkedVC = value;
+    public void setVCCheckStatus(boolean val) {
+        this.voiceChatCheckStatus = val;
+    }
+
+    public boolean isVCChecked() {
+        return voiceChatCheckStatus;
+    }
+
+    public boolean hasVCMod() {
+        return this.voiceChatModStatus;
     }
 
     public void runVoiceChatNotifications() {
-        new BukkitRunnable() {
+        this.voiceNotifications = new BukkitRunnable() {
             @Override
             public void run() {
                 if (Config.instance().VC_NOTIFICATION_SOUND_USE) {
@@ -82,7 +91,7 @@ public class RegicideUIPlayer {
         }.runTaskTimerAsynchronously(RegicideUI.instance(), Config.instance().VC_NOTIFICATION_DELAY, Config.instance().VC_NOTIFICATION_PERIOD);
     }
 
-    public void stopVoiceChatNotifications() {
-        this.vcNotificationTask.cancel();
+    public void stopVoiceChatNotification() {
+        this.voiceNotifications.cancel();
     }
 }
