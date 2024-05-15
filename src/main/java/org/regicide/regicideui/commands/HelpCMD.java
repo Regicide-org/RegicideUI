@@ -16,7 +16,7 @@ public final class HelpCMD {
                     Window window = Window.merged()
                             .setViewer(pExecutor)
                             .setGui(new Help(pExecutor).getGui())
-                            .setTitle(Localization.get("ui.element.wiki.title", pExecutor.locale().toString()))
+                            .setTitle(Localization.getRaw("ui.element.wiki.title", pExecutor.locale().toString()))
                             .build();
                     window.open();
                 })

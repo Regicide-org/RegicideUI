@@ -31,7 +31,7 @@ public class WikiBtn extends DefaultElementGUI {
             Window window = Window.merged()
                     .setViewer(player)
                     .setGui(new Help(WindowManager.getInstance().getOpenWindow(player), player).getGui())
-                    .setTitle(Localization.get("ui.element.wiki.title", container.getViewer().locale().toString()))
+                    .setTitle(Localization.getRaw("ui.element.wiki.title", container.getViewer().locale().toString()))
                     .build();
             window.open();
 

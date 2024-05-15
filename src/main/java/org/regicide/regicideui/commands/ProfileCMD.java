@@ -38,14 +38,14 @@ public final class ProfileCMD {
 
                         if (!(pExecutor.hasPermission("regicideui.command.profile.other"))) {
 
-                            String msgText = Localization.get("message.error.don't_have_permission.to_perform_command", pExecutor.locale().toString());
+                            String msgText = Localization.getRaw("message.error.don't_have_permission.to_perform_command", pExecutor.locale().toString());
                             Component msg = MiniMessage.miniMessage().deserialize("<i:false><white>"+msgText+"</white></i>");
                             pExecutor.sendMessage(msg);
                             return;
                         }
 
                         if (pTarget == null) {
-                            String msgText = Localization.get("message.error.player_never_logged_on_this_server", pExecutor.locale().toString());
+                            String msgText = Localization.getRaw("message.error.player_never_logged_on_this_server", pExecutor.locale().toString());
                             Component msg = MiniMessage.miniMessage().deserialize("<i:false><white>"+msgText+"</white></i>");
                             pExecutor.sendMessage(msg);
 
@@ -54,7 +54,7 @@ public final class ProfileCMD {
 
                         Window window = Window.merged()
                                 .setViewer(pExecutor)
-                                .setTitle(Localization.get("ui.element.profile.title", pExecutor.locale().toString()))
+                                .setTitle(Localization.getRaw("ui.element.profile.title", pExecutor.locale().toString()))
                                 .setGui(new Profile(pExecutor).getGui())
                                 .build();
                         window.open();
@@ -63,7 +63,7 @@ public final class ProfileCMD {
 
                         Window window = Window.merged()
                                 .setViewer(pExecutor)
-                                .setTitle(Localization.get("ui.element.profile.title", pExecutor.locale().toString()))
+                                .setTitle(Localization.getRaw("ui.element.profile.title", pExecutor.locale().toString()))
                                 .setGui(new Profile(pExecutor).getGui())
                                 .build();
                         window.open();

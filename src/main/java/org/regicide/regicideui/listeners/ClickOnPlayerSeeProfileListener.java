@@ -29,7 +29,7 @@ public final class ClickOnPlayerSeeProfileListener implements Listener {
 
         Window window = Window.merged()
                 .setViewer(e.getPlayer())
-                .setTitle(Localization.get("ui.element.profile.title", p.locale().toString()))
+                .setTitle(Localization.getRaw("ui.element.profile.title", p.locale().toString()))
                 .setGui(new Profile(p).getGui())
                 .build();
         window.open();

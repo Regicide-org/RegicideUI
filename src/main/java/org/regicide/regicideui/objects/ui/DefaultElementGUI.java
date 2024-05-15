@@ -45,7 +45,7 @@ public abstract class DefaultElementGUI extends AbstractItem {
 
         m.setCustomModelData(this.cmd);
 
-        String nameText = Localization.get(this.nameKey, container.getViewer().locale().toString());
+        String nameText = Localization.getRaw(this.nameKey, container.getViewer().locale().toString());
         Component name = MiniMessage.miniMessage().deserialize("<i:false><white>"+nameText+"</white></i>");
         m.displayName(name);
 
@@ -53,7 +53,7 @@ public abstract class DefaultElementGUI extends AbstractItem {
         int n = 1;
         while (true) {
             try {
-                String s = Localization.get(loreKey + "." + n, container.getViewer().locale().toString());
+                String s = Localization.getRaw(loreKey + "." + n, container.getViewer().locale().toString());
                 n++;
                 lore.add(MiniMessage.miniMessage().deserialize("<i:false><white>"+s+"</white></i>"));
             } catch (MissingResourceException e) {

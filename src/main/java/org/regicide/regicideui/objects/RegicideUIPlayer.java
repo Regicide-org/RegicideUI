@@ -1,7 +1,15 @@
 package org.regicide.regicideui.objects;
 
+import net.kyori.adventure.sound.Sound;
+import net.kyori.adventure.text.Component;
+import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
+import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.scheduler.BukkitTask;
 import org.jetbrains.annotations.NotNull;
+import org.regicide.regicideui.Config;
+import org.regicide.regicideui.Localization;
+import org.regicide.regicideui.RegicideUI;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -35,6 +43,8 @@ public class RegicideUIPlayer {
         return REGICIDE_UI_PLAYER_MAP.get(player.getUniqueId());
     }
 
+    private BukkitTask vcNotificationTask;
+
     private final Player base;
     private boolean checkedVC;
 
@@ -52,5 +62,27 @@ public class RegicideUIPlayer {
 
     public void setVcChecked(boolean value) {
         this.checkedVC = value;
+    }
+
+    public void runVoiceChatNotifications() {
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                if (Config.instance().VC_NOTIFICATION_SOUND_USE) {
+                    Sound s = Sound.sound(
+                            new NamespacedKey(Config.instance().VC_NOTIFICATION_PATH_SPACE, Config.instance().VC_NOTIFICATION_PATH_NAME),
+                            Sound.Source.PLAYER,
+                            Config.instance().VC_NOTIFICATION_VOLUME,
+                            Config.instance().VC_NOTIFICATION_PITCH
+                    );
+                    getBase().playSound(s);
+                }
+                getBase().sendActionBar(Localization.get("message.notification.voicechat_not_installed.notification_message", getBase().locale().toString()));
+            }
+        }.runTaskTimerAsynchronously(RegicideUI.instance(), Config.instance().VC_NOTIFICATION_DELAY, Config.instance().VC_NOTIFICATION_PERIOD);
+    }
+
+    public void stopVoiceChatNotifications() {
+        this.vcNotificationTask.cancel();
     }
 }

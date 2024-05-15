@@ -77,29 +77,40 @@ GUI:
       - "bukkit:help"
       - "minecraft:help"
 
-  # SimpleVoiceChat interactions
-  voice-chat:
-    # Will the plugin interact with the SimpleVoiceChat plugin?
-    voice-chat: true
+# SimpleVoiceChat interactions
+voice-chat:
+  # Will the plugin interact with the SimpleVoiceChat plugin?
+  using: true
 
-    # Plugin installation notification settings.
-    # Shown to the client if he does not have the mod installed.
-    #
-    # The message content is edited in localization files.
-    # Localization key is message.notification.voicechat_not_installed
-    installation-notification:
-      # Cooldown between notifications.
-      # NOTE: Minecraft ticks are indicated as the value!
-      period: 1200
-      # How long after checking the cleint for installed of voicechat mod, will he receive the first notification.
-      # NOTE: Minecraft ticks are indicated as the value!
-      delay: 1200
-      # Will notifications play sounds.
-      use-sound: true
-      sound:
-        path:
-          space: "minecraft"
-          name: "block.note_block.pling"
-        pitch: 0.1
-        volume: 1.0
+  # The message content is edited in localization files.
+  #
+  # Localization key is message.notification.voicechat_not_installed.first_message
+  installation-first-message:
+    use-message: true
+    # Delay in ticks to show player message after join to the server.
+    delay: 100
 
+  # Plugin installation notification settings.
+  # Shown to the client if he does not have the mod installed.
+  #
+  # The message content is edited in localization files.
+  # Localization key is message.notification.voicechat_not_installed.notification_message
+  installation-notification:
+
+    # Will period-notification works.
+    use-notification: true
+
+    # Cooldown between notifications.
+    # NOTE: Minecraft ticks are indicated as the value!
+    period: 1200
+    # How long after checking the cleint for installed of voicechat mod, will he receive the first notification.
+    # NOTE: Minecraft ticks are indicated as the value!
+    delay: 1200
+    # Will notifications play sounds.
+    use-sound: true
+    sound:
+      path:
+        space: "minecraft"
+        name: "block.note_block.pling"
+      pitch: 0.1
+      volume: 1.0

@@ -13,9 +13,9 @@ import org.bukkit.scheduler.BukkitRunnable;
 import org.regicide.regicideui.commands.*;
 import org.regicide.regicideui.listeners.ClickOnPlayerSeeProfileListener;
 import org.regicide.regicideui.listeners.ClientJoinListener;
+import org.regicide.regicideui.listeners.VoiceChatChecker;
 import org.regicide.regicideui.objects.PlayerNameStorage;
 import org.regicide.regicideui.objects.RegicideUIPlayer;
-import org.regicide.regicideui.util.RegicideVoiceChat;
 
 import java.io.File;
 import java.io.IOException;
@@ -135,14 +135,12 @@ public final class RegicideUI extends JavaPlugin {
         // SimpleVoiceChat
         Plugin svc = getServer().getPluginManager().getPlugin("voicechat");
         if (svc != null) {
-            BukkitVoicechatService service = getServer().getServicesManager().load(BukkitVoicechatService.class);
-            service.registerPlugin(new RegicideVoiceChat());
             getLogger().info(svc.getPluginMeta().getName() + " – " + vault.getPluginMeta().getVersion() + " was successfully found!");
+            getServer().getPluginManager().registerEvents(new VoiceChatChecker(), this);
         }
         else {
             getLogger().warning("SimpleVoiceChat was not found! All plugin elements using Vault will be disabled!");
         }
-
     }
 
     private void defaultListenersLoad() {

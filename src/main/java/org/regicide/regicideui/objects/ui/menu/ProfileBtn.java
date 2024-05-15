@@ -27,7 +27,7 @@ public class ProfileBtn extends DefaultElementGUI {
         Window window = Window.merged()
                 .setViewer(player)
                 .setGui(new Profile(player).getGui())
-                .setTitle(Localization.get("ui.element.profile.title", container.getViewer().locale().toString()))
+                .setTitle(Localization.getRaw("ui.element.profile.title", container.getViewer().locale().toString()))
                 .build();
         window.open();
 

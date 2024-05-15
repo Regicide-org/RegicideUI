@@ -23,7 +23,7 @@ public final class VkCMD {
                         return;
                     }
 
-                    String msg = Localization.get("message.button.open.vk", ((Player) sender).locale().toString());
+                    String msg = Localization.getRaw("message.button.open.vk", ((Player) sender).locale().toString());
                     msg = MessageFormat.format(msg, mapLink);
 
                     sender.sendMessage(MiniMessage.miniMessage().deserialize(msg));

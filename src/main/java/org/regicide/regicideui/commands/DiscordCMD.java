@@ -24,7 +24,7 @@ public final class DiscordCMD {
 
                         return;
                     }
-                    String msg = Localization.get("message.button.open.discord", ((Player) sender).locale().toString());
+                    String msg = Localization.getRaw("message.button.open.discord", ((Player) sender).locale().toString());
                     msg = MessageFormat.format(msg, dsLink);
 
 

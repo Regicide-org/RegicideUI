@@ -34,6 +34,13 @@ public final class Config {
     public final List<String> HELP_UNREGISTERED_COMMANDS;
     public final boolean VC_USE;
     public final int VC_NOTIFICATION_PERIOD;
+
+    public final boolean VC_FIRST_MESSAGE_USE;
+
+    public final int VC_FIRST_MESSAGE_DELAY;
+
+    public final boolean VC_NOTIFICATION_USE;
+
     public final int VC_NOTIFICATION_DELAY;
     public final boolean VC_NOTIFICATION_SOUND_USE;
     public final String VC_NOTIFICATION_PATH_SPACE;
@@ -82,15 +89,19 @@ public final class Config {
         USE_CUSTOM_HELP = fileConfig.getBoolean("GUI.help.use-custom-help");
         HELP_UNREGISTERED_COMMANDS = fileConfig.getStringList("GUI.help.unregister-help");
 
-        VC_USE = fileConfig.getBoolean("voice-chat.voice-chat");
+        VC_USE = fileConfig.getBoolean("voice-chat.using");
 
+        VC_FIRST_MESSAGE_USE = fileConfig.getBoolean("voice-chat.installation-first-message.use-message");
+        VC_FIRST_MESSAGE_DELAY = fileConfig.getInt("voice-chat.installation-first-message.delay");
+
+        VC_NOTIFICATION_USE = fileConfig.getBoolean("voice-chat.installation-notification.use-notification");
         VC_NOTIFICATION_SOUND_USE = fileConfig.getBoolean("voice-chat.installation-notification.use-sound");
         VC_NOTIFICATION_PERIOD = fileConfig.getInt("voice-chat.installation-notification.period");
         VC_NOTIFICATION_DELAY = fileConfig.getInt("voice-chat.installation-notification.delay");
         VC_NOTIFICATION_PATH_SPACE = fileConfig.getString("voice-chat.installation-notification.sound.path.space");
         VC_NOTIFICATION_PATH_NAME = fileConfig.getString("voice-chat.installation-notification.sound.path.name");
-        VC_NOTIFICATION_PITCH = (float) fileConfig.getDouble("voice-chat.installation-notification.pitch");
-        VC_NOTIFICATION_VOLUME = (float) fileConfig.getDouble("voice-chat.installation-notification.volume");
+        VC_NOTIFICATION_PITCH = (float) fileConfig.getDouble("voice-chat.installation-notification.sound.pitch");
+        VC_NOTIFICATION_VOLUME = (float) fileConfig.getDouble("voice-chat.installation-notification.sound.volume");
     }
 
     public static Config instance() {

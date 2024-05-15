@@ -24,7 +24,7 @@ public final class  MapCMD {
                         return;
                     }
 
-                    String msg = Localization.get("message.button.open.map", ((Player) sender).locale().toString());
+                    String msg = Localization.getRaw("message.button.open.map", ((Player) sender).locale().toString());
                     msg = MessageFormat.format(msg, mapLink);
 
                     sender.sendMessage(MiniMessage.miniMessage().deserialize(msg));

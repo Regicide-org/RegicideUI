@@ -18,7 +18,7 @@ public final class HrefsCMD {
 
                     Window window = Window.merged()
                             .setViewer(pe)
-                            .setTitle(Localization.get("ui.element.hrefs.title", pe.locale().toString()))
+                            .setTitle(Localization.getRaw("ui.element.hrefs.title", pe.locale().toString()))
                             .setGui(new Hrefs(pe).getGui())
                             .build();
                     window.open();

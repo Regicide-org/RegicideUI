@@ -1,5 +1,7 @@
 package org.regicide.regicideui;
 
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.NotNull;
@@ -165,7 +167,7 @@ public final class Localization {
      * it's null this method will return reference default localization string
      * and if it's null too then this method will return the specified key.
      */
-    public static String get(@NotNull final String key) {
+    public static String getRaw(@NotNull final String key) {
         // Override-default? -> Reference-default? -> key
         LocalizationBundle bundle;
         String msg;
@@ -191,9 +193,13 @@ public final class Localization {
      * @param localeTag The string of the localization by specified locale code.
      * @return The string of the localization by specified locale code.
      */
-    public static String get(@NotNull final String key, @NotNull final String localeTag) {
+    public static String getRaw(@NotNull final String key, @NotNull final String localeTag) {
         if (isClientOriented)
             return getClientOriented(key, localeTag);
-        else return get(key);
+        else return getRaw(key);
+    }
+
+    public static Component get(@NotNull final String key, @NotNull final String localeTag) {
+        return MiniMessage.miniMessage().deserialize(getRaw(key, localeTag));
     }
 }

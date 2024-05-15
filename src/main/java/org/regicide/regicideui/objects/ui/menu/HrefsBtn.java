@@ -29,7 +29,7 @@ public class HrefsBtn extends DefaultElementGUI {
             Window window = Window.merged()
                     .setViewer(player)
                     .setGui(new Hrefs(WindowManager.getInstance().getOpenWindow(player), player).getGui())
-                    .setTitle(Localization.get("ui.element.hrefs.title", container.getViewer().locale().toString()))
+                    .setTitle(Localization.getRaw("ui.element.hrefs.title", container.getViewer().locale().toString()))
                     .build();
             window.open();
 

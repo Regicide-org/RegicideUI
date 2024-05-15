@@ -20,7 +20,7 @@ public final class MenuCMD {
                     Window w = Window.merged()
                             .setViewer(pe)
                             .setGui(new Menu(pe).getGui())
-                            .setTitle(Localization.get("ui.element.menu.title", pe.locale().toString()))
+                            .setTitle(Localization.getRaw("ui.element.menu.title", pe.locale().toString()))
                             .build();
                     w.open();
 
