@@ -1,12 +1,18 @@
 package org.regicide.regicideui.objects.ui.nations.collection;
 
+import com.palmergames.bukkit.towny.TownyAPI;
+import com.palmergames.bukkit.towny.object.Nation;
+import com.palmergames.bukkit.towny.object.Town;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import org.regicide.regicideui.RegicideUI;
 import org.regicide.regicideui.objects.ui.ContainerGUI;
+import org.regicide.regicideui.objects.ui.profile.collection.PlayerHeadBtn;
+import org.regicide.regicideui.objects.ui.towns.collection.TownBtn;
 import org.regicide.regicideui.objects.ui.universal.*;
 import xyz.xenondevs.invui.gui.PagedGui;
 import xyz.xenondevs.invui.gui.structure.Markers;
+import xyz.xenondevs.invui.item.Item;
 import xyz.xenondevs.invui.item.impl.AbstractItem;
 import xyz.xenondevs.invui.window.Window;
 
@@ -24,9 +30,9 @@ public final class CollectionNations extends ContainerGUI {
 
     @Override
     public void setup() {
-        List<Player> pList = new ArrayList<>(RegicideUI.instance().getServer().getOnlinePlayers());
-        //List<Item> elements = new ArrayList<>();
-        //pList.forEach(player -> elements.add(new PlayerHeadBtn(this, player)));
+        List<Nation> nations = TownyAPI.getInstance().getNations();
+        List<Item> elements = new ArrayList<>();
+        nations.forEach(nation -> elements.add(new NationBtn(this, nation)));
 
         AbstractItem exitBackBtn;
         if (this.hasPrevWindow())
@@ -43,15 +49,16 @@ public final class CollectionNations extends ContainerGUI {
                         ". @ @ @ @ @ @ @ .",
                         ". . . . . . . . .",
                         ". . . . . . . . .",
-                        ". . . . . . . . .",
+                        ". . N . . . . . .",
                         ". . . . . . . . .",
                         ". . . . . . . . .")
                 .addIngredient('e', exitBackBtn)
                 .addIngredient('i', new InfoBtn(this, "ui.element.nationlist.button.info.lore", 99))
                 .addIngredient('<', new BackItem())
                 .addIngredient('>', new ForwardItem())
+                .addIngredient('N', new SelfNationBtn(this, this.viewer))
                 .addIngredient('@', Markers.CONTENT_LIST_SLOT_HORIZONTAL)
-                //.setContent(elements)
+                .setContent(elements)
                 .build();
     }
 }

@@ -1,6 +1,6 @@
-package org.regicide.regicideui.objects.ui.nations.collection;
+package org.regicide.regicideui.objects.ui.towns.collection;
 
-import com.palmergames.bukkit.towny.object.Nation;
+import com.palmergames.bukkit.towny.TownyAPI;
 import com.palmergames.bukkit.towny.object.Town;
 import net.kyori.adventure.sound.Sound;
 import net.kyori.adventure.text.Component;
@@ -12,11 +12,11 @@ import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.inventory.meta.SkullMeta;
 import org.jetbrains.annotations.NotNull;
 import org.regicide.regicideui.Config;
 import org.regicide.regicideui.Localization;
 import org.regicide.regicideui.objects.ui.ContainerGUI;
-import org.regicide.regicideui.objects.ui.nations.single.NationUI;
 import org.regicide.regicideui.objects.ui.profile.single.Profile;
 import xyz.xenondevs.invui.item.ItemProvider;
 import xyz.xenondevs.invui.item.builder.ItemBuilder;
@@ -27,14 +27,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.MissingResourceException;
 
-public class NationBtn extends AbstractItem {
+public class SelfTownBtn extends AbstractItem {
     private final ContainerGUI container;
-    private final Nation nation;
+    private final Player player;
 
 
-    public NationBtn(@NotNull final ContainerGUI container, @NotNull final Nation nation) {
+    public SelfTownBtn(@NotNull final ContainerGUI container, @NotNull final Player player) {
         this.container = container;
-        this.nation = nation;
+        this.player = player;
     }
 
     @Override
@@ -42,13 +42,21 @@ public class NationBtn extends AbstractItem {
         ItemStack i = new ItemStack(Material.FLINT_AND_STEEL);
         ItemMeta m = i.getItemMeta();
 
-        m.setCustomModelData(109);
-
-        String nameText = nation.getName();
+        String nameText = "Ваш город";
         Component name = MiniMessage.miniMessage().deserialize("<i:false><white>"+nameText+"</white></i>");
         m.displayName(name);
 
-        String loreKey = "ui.element.nationlist.button.nationicon.lore";
+        Town selfTown = TownyAPI.getInstance().getResident(player).getTownOrNull();
+        String loreKey;
+        if (selfTown != null) {
+            m.setCustomModelData(108);
+            loreKey = "ui.element.townlist.button.selftown.lore";
+        }
+        else {
+            m.setCustomModelData(125);
+            loreKey = "ui.element.townlist.button.selftown.blocked.lore";
+        }
+
         List<Component> lore = new ArrayList<>();
         int n = 1;
         while (true) {
@@ -69,12 +77,12 @@ public class NationBtn extends AbstractItem {
     @SuppressWarnings("ConstantConditions")
     @Override
     public void handleClick(@NotNull ClickType clickType, @NotNull Player player, @NotNull InventoryClickEvent inventoryClickEvent) {
-        if (clickType.isLeftClick()) {
+        if (clickType.isLeftClick() && TownyAPI.getInstance().getResident(player).hasTown()) {
 
             Window window = Window.merged()
                     .setViewer(player)
-                    .setTitle(Localization.getRaw("ui.element.nation.title", player.locale().toString()))
-                    .setGui(new NationUI(player).getGui())
+                    .setTitle(Localization.getRaw("ui.element.town.title", player.locale().toString()))
+                    .setGui(new Profile(player).getGui())
                     .build();
             window.open();
 

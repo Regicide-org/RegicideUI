@@ -16,11 +16,9 @@ import xyz.xenondevs.invui.window.Window;
 import xyz.xenondevs.invui.window.WindowManager;
 
 public class TownsBtn extends DefaultElementGUI {
-
     public TownsBtn(@NotNull final ContainerGUI container) {
         super(container, "ui.element.menu.button.towns.name", "ui.element.menu.button.towns.lore", 108);
     }
-
     @Override
     public void handleClick(@NotNull ClickType clickType, @NotNull Player player, @NotNull InventoryClickEvent event) {
         if (clickType.isLeftClick()) {
