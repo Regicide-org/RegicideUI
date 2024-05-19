@@ -158,6 +158,9 @@ public final class RegicideUI extends JavaPlugin {
         HrefsCMD.register();
         DiscordCMD.register();
         VkCMD.register();
+        PlayerListCMD.register();
+        TownListCMD.register();
+        NationListCMD.register();
         ProfileCMD.register();
 
         if (Config.instance().USE_CUSTOM_HELP) {

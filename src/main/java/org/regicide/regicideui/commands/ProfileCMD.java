@@ -10,7 +10,7 @@ import org.bukkit.OfflinePlayer;
 import org.regicide.regicideui.Localization;
 import org.regicide.regicideui.RegicideUI;
 import org.regicide.regicideui.objects.PlayerNameStorage;
-import org.regicide.regicideui.objects.ui.profile.Profile;
+import org.regicide.regicideui.objects.ui.profile.single.Profile;
 import xyz.xenondevs.invui.window.Window;
 
 import java.util.ArrayList;

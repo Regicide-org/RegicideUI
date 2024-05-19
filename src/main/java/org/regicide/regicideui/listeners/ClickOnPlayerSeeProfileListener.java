@@ -9,7 +9,7 @@ import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.jetbrains.annotations.NotNull;
 import org.regicide.regicideui.Config;
 import org.regicide.regicideui.Localization;
-import org.regicide.regicideui.objects.ui.profile.Profile;
+import org.regicide.regicideui.objects.ui.profile.single.Profile;
 import xyz.xenondevs.invui.window.Window;
 
 public final class ClickOnPlayerSeeProfileListener implements Listener {

@@ -1,4 +1,4 @@
-package org.regicide.regicideui.objects.ui.profile;
+package org.regicide.regicideui.objects.ui.profile.single;
 
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;

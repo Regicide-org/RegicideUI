@@ -10,8 +10,11 @@ import org.regicide.regicideui.Config;
 import org.regicide.regicideui.Localization;
 import org.regicide.regicideui.objects.ui.ContainerGUI;
 import org.regicide.regicideui.objects.ui.DefaultElementGUI;
-import org.regicide.regicideui.objects.ui.profile.Profile;
+import org.regicide.regicideui.objects.ui.hrefs.Hrefs;
+import org.regicide.regicideui.objects.ui.profile.collection.CollectionPlayers;
+import org.regicide.regicideui.objects.ui.profile.single.Profile;
 import xyz.xenondevs.invui.window.Window;
+import xyz.xenondevs.invui.window.WindowManager;
 
 public class ProfileBtn extends DefaultElementGUI {
 
@@ -24,19 +27,22 @@ public class ProfileBtn extends DefaultElementGUI {
 
     @Override
     public void handleClick(@NotNull ClickType clickType, @NotNull Player player, @NotNull InventoryClickEvent event) {
-        Window window = Window.merged()
-                .setViewer(player)
-                .setGui(new Profile(player).getGui())
-                .setTitle(Localization.getRaw("ui.element.profile.title", container.getViewer().locale().toString()))
-                .build();
-        window.open();
+        if (clickType.isLeftClick()) {
 
-        Sound s = Sound.sound(
-                new NamespacedKey(Config.instance().OPEN_MENU_PATH_SPACE, Config.instance().OPEN_MENU_PATH_NAME),
-                Sound.Source.PLAYER,
-                Config.instance().OPEN_MENU_VOLUME,
-                Config.instance().OPEN_MENU_PITCH
-        );
-        player.playSound(s);
+            Window window = Window.merged()
+                    .setViewer(player)
+                    .setGui(new CollectionPlayers(WindowManager.getInstance().getOpenWindow(player), player).getGui())
+                    .setTitle(Localization.getRaw("ui.element.playerlist.title", container.getViewer().locale().toString()))
+                    .build();
+            window.open();
+
+            Sound s = Sound.sound(
+                    new NamespacedKey(Config.instance().OPEN_MENU_PATH_SPACE, Config.instance().OPEN_MENU_PATH_NAME),
+                    Sound.Source.PLAYER,
+                    Config.instance().OPEN_MENU_VOLUME,
+                    Config.instance().OPEN_MENU_PITCH
+            );
+            player.playSound(s);
+        }
     }
 }
